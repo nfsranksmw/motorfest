@@ -102,6 +102,19 @@ body.bg-motorfest {
     transform: scale(1.05);
 }
 
+/* Contenedores de Secciones Generales */
+.main-container {
+    padding: 40px 5%;
+    min-height: 75vh;
+}
+
+.main-container h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #00ffcc;
+}
+
 /* Formularios y Panel de Ingreso */
 .container-form {
     display: flex;
