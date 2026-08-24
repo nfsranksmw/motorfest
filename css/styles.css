@@ -35,7 +35,7 @@ body.bg-motorfest {
 }
 
 .logo span {
-    color: #00ffcc; /* Color neón Motorfest */
+    color: #ffe600; /* Amarillo Motorfest */
 }
 
 .navbar nav a {
@@ -47,15 +47,19 @@ body.bg-motorfest {
 }
 
 .navbar nav a:hover, .navbar nav a.active {
-    color: #00ffcc;
+    color: #ffe600; /* Amarillo Motorfest */
 }
 
 .btn-login {
-    background: #00ffcc;
+    background: #ffe600; /* Amarillo Motorfest */
     color: #0b0f19 !important;
     padding: 8px 16px;
     border-radius: 4px;
     font-weight: bold;
+}
+
+.btn-login:hover {
+    background: #cca600;
 }
 
 /* Hero Section (Inicio) */
@@ -74,7 +78,7 @@ body.bg-motorfest {
     font-size: 48px;
     margin-bottom: 15px;
     color: #fff;
-    text-shadow: 0 0 10px rgba(0,255,204,0.5);
+    text-shadow: 0 0 10px rgba(255,230,0,0.5); /* Brillo amarillo */
 }
 
 .hero-content p {
@@ -86,8 +90,8 @@ body.bg-motorfest {
 
 .btn-primary {
     display: inline-block;
-    background: #ff0055; /* Estilo neón rosado/rojo racing */
-    color: #fff;
+    background: #ffe600; /* Amarillo Motorfest */
+    color: #0b0f19;
     padding: 12px 28px;
     border-radius: 4px;
     text-decoration: none;
@@ -98,7 +102,7 @@ body.bg-motorfest {
 }
 
 .btn-primary:hover {
-    background: #e6004c;
+    background: #cca600;
     transform: scale(1.05);
 }
 
@@ -112,7 +116,7 @@ body.bg-motorfest {
     font-family: 'Orbitron', sans-serif;
     font-size: 32px;
     margin-bottom: 20px;
-    color: #00ffcc;
+    color: #ffe600; /* Amarillo Motorfest */
 }
 
 /* Formularios y Panel de Ingreso */
@@ -171,7 +175,7 @@ body.bg-motorfest {
 
 .input-group input:focus, .input-group select:focus {
     outline: none;
-    border-color: #00ffcc;
+    border-color: #ffe600; /* Borde amarillo al enfocar */
 }
 
 .full-width {
@@ -182,18 +186,19 @@ body.bg-motorfest {
 
 .btn-secondary {
     background: transparent;
-    border: 1px solid #ff0055;
-    color: #ff0055;
-    padding: 10px;
+    border: 1px solid #ffe600; /* Borde amarillo */
+    color: #ffe600;
+    padding: 10px 16px;
     border-radius: 4px;
     font-family: 'Orbitron', sans-serif;
     font-weight: bold;
     transition: 0.2s;
     cursor: pointer;
+    margin-right: 5px;
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 0, 85, 0.1);
+    background: rgba(255, 230, 0, 0.1);
 }
 
 .hidden {
@@ -204,15 +209,6 @@ body.bg-motorfest {
     margin-top: 10px;
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #07090f;
-    color: #6b7280;
-    font-size: 14px;
-    border-top: 1px solid #1f293d;
-}
 /* Estilos para la tabla del expediente */
 .bskr-table {
     width: 100%;
@@ -233,17 +229,17 @@ footer {
 .bskr-table th {
     background: #1f293d;
     font-family: 'Orbitron', sans-serif;
-    color: #00ffcc;
+    color: #ffe600; /* Amarillo Motorfest */
     font-size: 13px;
     letter-spacing: 1px;
 }
 
 .bskr-table tr:hover {
-    background: rgba(0, 255, 204, 0.03);
+    background: rgba(255, 230, 0, 0.03);
 }
 
 .link-video {
-    color: #00ffcc;
+    color: #ffe600; /* Amarillo Motorfest */
     text-decoration: none;
     font-weight: 600;
 }
@@ -251,6 +247,7 @@ footer {
 .link-video:hover {
     text-decoration: underline;
 }
+
 /* Tarjetas de Miembros */
 .members-grid {
     display: grid;
@@ -270,7 +267,7 @@ footer {
 
 .member-card:hover {
     transform: translateY(-5px);
-    border-color: #00ffcc;
+    border-color: #ffe600; /* Amarillo Motorfest */
 }
 
 .member-avatar {
@@ -290,7 +287,7 @@ footer {
 }
 
 .member-role {
-    color: #00ffcc;
+    color: #ffe600; /* Amarillo Motorfest */
     font-size: 13px;
     font-weight: 600;
     margin-bottom: 10px;
@@ -314,7 +311,7 @@ footer {
     border-radius: 8px;
     padding: 25px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    border-left: 4px solid #ff0055;
+    border-left: 4px solid #ffe600; /* Borde izquierdo Amarillo Motorfest */
 }
 
 .setup-card h3 {
@@ -345,8 +342,15 @@ footer {
 }
 
 .setup-list li span {
-    color: #00ffcc;
+    color: #ffe600; /* Amarillo Motorfest */
 }
 
-
-
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #07090f;
+    color: #6b7280;
+    font-size: 14px;
+    border-top: 1px solid #1f293d;
+}
