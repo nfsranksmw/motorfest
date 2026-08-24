@@ -15,10 +15,12 @@ import {
 const firebaseConfig = {
   apiKey: "AIzaSyBPvGd0mCaql2yMeKK3UogRBDj3Ig9EYOI",
   authDomain: "bskrmostorfest.firebaseapp.com",
+  databaseURL: "https://bskrmostorfest-default-rtdb.firebaseio.com",
   projectId: "bskrmostorfest",
   storageBucket: "bskrmostorfest.firebasestorage.app",
   messagingSenderId: "662332371404",
-  appId: "1:662332371404:web:c70d8219c6e74fafffed69"
+  appId: "1:662332371404:web:c70d8219c6e74fafffed69",
+  measurementId: "G-WHH6X6227Z"
 };
 
 const app = initializeApp(firebaseConfig);
