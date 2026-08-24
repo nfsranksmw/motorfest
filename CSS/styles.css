@@ -251,4 +251,102 @@ footer {
 .link-video:hover {
     text-decoration: underline;
 }
+/* Tarjetas de Miembros */
+.members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.member-card {
+    background: #111827;
+    border: 1px solid #1f293d;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    transition: transform 0.2s;
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
+    border-color: #00ffcc;
+}
+
+.member-avatar {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+}
+
+.member-info {
+    padding: 20px;
+}
+
+.member-info h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.member-role {
+    color: #00ffcc;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.member-car {
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+/* Tarjetas de Tuneo (Setups) */
+.setups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.setup-card {
+    background: #111827;
+    border: 1px solid #1f293d;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    border-left: 4px solid #ff0055;
+}
+
+.setup-card h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.setup-author, .setup-category {
+    font-size: 13px;
+    color: #9ca3af;
+    margin-bottom: 5px;
+}
+
+.setup-list {
+    list-style: none;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #1f293d;
+}
+
+.setup-list li {
+    font-size: 13px;
+    color: #d1d5db;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.setup-list li span {
+    color: #00ffcc;
+}
+
+
 
