@@ -1,72 +1,66 @@
-// ==========================================
-// LÓGICA DE GESTIÓN DE RÉCORDS (Firestore)
-// Archivo: js/records.js
-// ==========================================
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// Utiliza la misma configuración de Firebase que en auth.js
+// Configuración de Firebase (asegúrate de que estos datos sean los de tu proyecto real)
 const firebaseConfig = {
     apiKey: "AIzaSyBPvGd0mCaql2yMeKK3UogRBDj3Ig9EYOI",
-    authDomain: "bskrmostorfest.firebaseapp.com",
-    projectId: "bskrmostorfest",
-    storageBucket: "bskrmostorfest.firebasestorage.app",
-    messagingSenderId: "662332371404",
-    appId: "1:662332371404:web:c70d8219c6e74fafffed69"
+  authDomain: "bskrmostorfest.firebaseapp.com",
+  databaseURL: "https://bskrmostorfest-default-rtdb.firebaseio.com",
+  projectId: "bskrmostorfest",
+  storageBucket: "bskrmostorfest.firebasestorage.app",
+  messagingSenderId: "662332371404",
+  appId: "1:662332371404:web:c70d8219c6e74fafffed69"
 };
 
+// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const auth = getAuth(app);
 
-// Manejar el formulario de subida de récords (en ingreso.html)
+// ==========================================
+// 1. GUARDAR RÉCORD (Desde ingreso.html)
+// ==========================================
 const recordForm = document.getElementById('record-form');
+
 if (recordForm) {
     recordForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const user = auth.currentUser;
-        if (!user) {
-            alert("Debes iniciar sesión para publicar un récord.");
-            return;
-        }
-
+        const pilot = document.getElementById('record-pilot').value;
         const category = document.getElementById('record-category').value;
         const track = document.getElementById('record-track').value;
         const timeScore = document.getElementById('record-time').value;
         const videoUrl = document.getElementById('record-video').value;
-        const pilotName = user.email.split('@')[0].toUpperCase();
 
         try {
+            // Guardar en la colección "records" de Firestore
             await addDoc(collection(db, "records"), {
-                pilot: pilotName,
+                pilot: pilot,
                 category: category,
                 track: track,
                 timeScore: timeScore,
                 videoUrl: videoUrl,
-                date: new Date()
+                createdAt: new Date()
             });
 
-            alert("¡Récord publicado con éxito en el expediente!");
+            alert("¡Récord publicado con éxito en el sistema BSKR!");
             recordForm.reset();
-            window.location.href = "expediente.html"; // Redirigir a la tabla
         } catch (error) {
-            console.error("Error al guardar el récord: ", error);
-            alert("Hubo un error al publicar el récord.");
+            console.error("Error detallado al publicar el récord: ", error);
+            alert("Error al publicar el récord. Revisa la consola para más detalles.");
         }
     });
 }
 
-// Cargar los récords en la tabla (en expediente.html)
+// ==========================================
+// 2. CARGAR RÉCORDS EN LA TABLA (En expediente.html)
+// ==========================================
 const tableBody = document.getElementById('records-table-body');
+
 async function cargarRecords() {
     if (!tableBody) return;
 
     try {
-        const q = query(collection(db, "records"), orderBy("date", "desc"));
-        const querySnapshot = await getDocs(q);
+        const querySnapshot = await getDocs(collection(db, "records"));
         
         tableBody.innerHTML = ""; // Limpiar texto de carga
 
@@ -80,7 +74,7 @@ async function cargarRecords() {
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td><strong>${data.pilot}</strong></td>
-                <td><span class="badge-${data.category.toLowerCase().replace(/\s/g, '')}">${data.category}</span></td>
+                <td><span style="color: #ffe600; font-weight: bold;">${data.category}</span></td>
                 <td>${data.track}</td>
                 <td>${data.timeScore}</td>
                 <td><a href="${data.videoUrl}" target="_blank" class="link-video">Ver Video 🎥</a></td>
@@ -89,11 +83,10 @@ async function cargarRecords() {
         });
     } catch (error) {
         console.error("Error al cargar los récords: ", error);
-        tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #ff0055;">Error al cargar los datos de la base de datos.</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #ff0055;">Error al conectar con la base de datos.</td></tr>`;
     }
 }
 
-// Ejecutar si estamos en expediente.html
 if (tableBody) {
     cargarRecords();
 }
