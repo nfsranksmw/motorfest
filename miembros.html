@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso y Récords | BSKR Motorfest</title>
+    <title>Miembros | BSKR Motorfest</title>
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -15,76 +15,43 @@
         <nav>
             <a href="index.html">Inicio</a>
             <a href="expediente.html">Expediente</a>
-            <a href="miembros.html">Miembros</a>
+            <a href="miembros.html" class="active">Miembros</a>
             <a href="tuneo.html">Tuneo</a>
-            <a href="ingreso.html" class="active btn-login">Acceso / Perfil</a>
+            <a href="ingreso.html" class="btn-login">Acceso / Perfil</a>
         </nav>
     </header>
 
-    <!-- Contenedor Principal -->
-    <main class="container-form">
-        
-        <!-- SECCIÓN 1: LOGIN -->
-        <section id="auth-section" class="form-box">
-            <h2>Acceso Pilotos BSKR</h2>
-            <p>Inicia sesión para registrar tus récords en The Crew Motorfest.</p>
-            
-            <form id="login-form">
-                <div class="input-group">
-                    <label>Correo Electrónico</label>
-                    <input type="email" id="login-email" required placeholder="piloto@bskr.com">
+    <!-- Contenido Principal -->
+    <main class="main-container">
+        <h2>Directorio de Pilotos BSKR</h2>
+        <p style="color: #9ca3af; margin-bottom: 30px;">La plantilla oficial de corredores en The Crew Motorfest.</p>
+
+        <!-- Grid de Miembros -->
+        <div class="members-grid" id="members-container">
+            <!-- Ejemplo estático de tarjeta de miembro (luego se puede conectar a Firebase) -->
+            <div class="member-card">
+                <div class="member-avatar" style="background-image: url('https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=300&q=80')"></div>
+                <div class="member-info">
+                    <h3>[BSKR] Viper</h3>
+                    <p class="member-role">Líder / Fundador</p>
+                    <p class="member-car">🚗 Auto Fav: Revuelto / Hypercar</p>
                 </div>
-                <div class="input-group">
-                    <label>Contraseña</label>
-                    <input type="password" id="login-password" required placeholder="********">
+            </div>
+
+            <div class="member-card">
+                <div class="member-avatar" style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80')"></div>
+                <div class="member-info">
+                    <h3>[BSKR] NeonQueen</h3>
+                    <p class="member-role">Veterana / Pro Tuner</p>
+                    <p class="member-car">🚗 Auto Fav: Nissan GT-R R35</p>
                 </div>
-                <button type="submit" class="btn-primary full-width">Iniciar Sesión</button>
-            </form>
-        </section>
-
-        <!-- SECCIÓN 2: PANEL DE SUBIDA DE RÉCORDS -->
-        <section id="dashboard-section" class="form-box hidden">
-            <h2>Bienvenido, <span id="user-tag-display">Piloto</span></h2>
-            <p>Sube tu evidencia al expediente oficial.</p>
-
-            <form id="record-form">
-                <div class="input-group">
-                    <label>Categoría</label>
-                    <select id="record-category" required>
-                        <option value="Grand Race">Grand Race</option>
-                        <option value="Summit">Summit</option>
-                        <option value="Playlist">Playlist</option>
-                    </select>
-                </div>
-
-                <div class="input-group">
-                    <label>Nombre de la Pista / Evento</label>
-                    <input type="text" id="record-track" required placeholder="Ej: Liberty Walk / Tour Oahu">
-                </div>
-
-                <div class="input-group">
-                    <label>Tiempo / Puntuación</label>
-                    <input type="text" id="record-time" required placeholder="Ej: 02:14.560 o 1,250,400 pts">
-                </div>
-
-                <div class="input-group">
-                    <label>URL del Video de Evidencia</label>
-                    <input type="url" id="record-video" required placeholder="https://youtube.com/watch?v=...">
-                </div>
-
-                <button type="submit" class="btn-primary full-width">Publicar Récord</button>
-            </form>
-
-            <button id="btn-logout" class="btn-secondary full-width mt-10">Cerrar Sesión</button>
-        </section>
-
+            </div>
+        </div>
     </main>
 
     <footer>
         <p>&copy; 2026 Clan BSKR - The Crew Motorfest. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Script de autenticación -->
-    <script type="module" src="js/auth.js"></script>
 </body>
 </html>
