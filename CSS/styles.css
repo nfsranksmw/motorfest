@@ -1,0 +1,215 @@
+/* ==========================================
+   ESTILOS GENERALES CLAN BSKR - MOTORFEST
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body.bg-motorfest {
+    font-family: 'Inter', sans-serif;
+    background-color: #0b0f19;
+    color: #f3f4f6;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: rgba(11, 15, 25, 0.95);
+    border-bottom: 2px solid #1f293d;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #00ffcc; /* Color neón Motorfest */
+}
+
+.navbar nav a {
+    color: #9ca3af;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.navbar nav a:hover, .navbar nav a.active {
+    color: #00ffcc;
+}
+
+.btn-login {
+    background: #00ffcc;
+    color: #0b0f19 !important;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/* Hero Section (Inicio) */
+.hero {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(rgba(11,15,25,0.7), rgba(11,15,25,0.9)), url('../images/motorfest-bg.jpg') center/cover;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 48px;
+    margin-bottom: 15px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0,255,204,0.5);
+}
+
+.hero-content p {
+    font-size: 18px;
+    color: #d1d5db;
+    max-width: 600px;
+    margin: 0 auto 25px auto;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: #ff0055; /* Estilo neón rosado/rojo racing */
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    transition: transform 0.2s, background 0.2s;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #e6004c;
+    transform: scale(1.05);
+}
+
+/* Contenedores de Secciones Generales */
+.main-container {
+    padding: 40px 5%;
+    min-height: 75vh;
+}
+
+.main-container h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #00ffcc;
+}
+
+/* Formularios y Panel de Ingreso */
+.container-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+    padding: 20px;
+}
+
+.form-box {
+    background: #111827;
+    border: 1px solid #1f293d;
+    padding: 30px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.form-box h2 {
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.form-box p {
+    color: #9ca3af;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    color: #d1d5db;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.input-group input, .input-group select {
+    width: 100%;
+    padding: 10px;
+    background: #0b0f19;
+    border: 1px solid #374151;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.input-group input:focus, .input-group select:focus {
+    outline: none;
+    border-color: #00ffcc;
+}
+
+.full-width {
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid #ff0055;
+    color: #ff0055;
+    padding: 10px;
+    border-radius: 4px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 0, 85, 0.1);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #07090f;
+    color: #6b7280;
+    font-size: 14px;
+    border-top: 1px solid #1f293d;
+}
