@@ -1,40 +1,46 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-// Configuración de Firebase (asegúrate de que estos datos sean los de tu proyecto real)
+// Tus credenciales de Firebase
 const firebaseConfig = {
-    apiKey: "AIzaSyBPvGd0mCaql2yMeKK3UogRBDj3Ig9EYOI",
+  apiKey: "AIzaSyBPvGd0mCaql2yMeKK3UogRBDj3Ig9EYOI",
   authDomain: "bskrmostorfest.firebaseapp.com",
   databaseURL: "https://bskrmostorfest-default-rtdb.firebaseio.com",
   projectId: "bskrmostorfest",
   storageBucket: "bskrmostorfest.firebasestorage.app",
   messagingSenderId: "662332371404",
-  appId: "1:662332371404:web:c70d8219c6e74fafffed69"
+  appId: "1:662332371404:web:c70d8219c6e74fafffed69",
+  measurementId: "G-WHH6X6227Z"
 };
 
-// Inicializar Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
-// ==========================================
-// 1. GUARDAR RÉCORD (Desde ingreso.html)
-// ==========================================
+// 1. GESTIÓN DEL FORMULARIO DE RÉCORDS (ingreso.html)
 const recordForm = document.getElementById('record-form');
 
 if (recordForm) {
     recordForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const pilot = document.getElementById('record-pilot').value;
+        const user = auth.currentUser;
+        
+        // Obtenemos los valores del formulario
         const category = document.getElementById('record-category').value;
         const track = document.getElementById('record-track').value;
         const timeScore = document.getElementById('record-time').value;
         const videoUrl = document.getElementById('record-video').value;
+        
+        // Si hay un usuario logueado usamos su correo, si no, uno genérico de prueba
+        const pilotName = user ? user.email.split('@')[0].toUpperCase() : "PILOTO BSKR";
 
         try {
-            // Guardar en la colección "records" de Firestore
+            console.log("Enviando récord a Firestore...");
+            
             await addDoc(collection(db, "records"), {
-                pilot: pilot,
+                pilot: pilotName,
                 category: category,
                 track: track,
                 timeScore: timeScore,
@@ -42,18 +48,16 @@ if (recordForm) {
                 createdAt: new Date()
             });
 
-            alert("¡Récord publicado con éxito en el sistema BSKR!");
+            alert("¡Récord publicado con éxito!");
             recordForm.reset();
         } catch (error) {
-            console.error("Error detallado al publicar el récord: ", error);
-            alert("Error al publicar el récord. Revisa la consola para más detalles.");
+            console.error("Error al registrar en Firestore: ", error);
+            alert("Error al subir el récord. Revisa la consola.");
         }
     });
 }
 
-// ==========================================
-// 2. CARGAR RÉCORDS EN LA TABLA (En expediente.html)
-// ==========================================
+// 2. CARGAR RÉCORDS EN LA TABLA (expediente.html)
 const tableBody = document.getElementById('records-table-body');
 
 async function cargarRecords() {
@@ -62,7 +66,7 @@ async function cargarRecords() {
     try {
         const querySnapshot = await getDocs(collection(db, "records"));
         
-        tableBody.innerHTML = ""; // Limpiar texto de carga
+        tableBody.innerHTML = ""; 
 
         if (querySnapshot.empty) {
             tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #6b7280;">No hay récords registrados todavía. ¡Sé el primero!</td></tr>`;
@@ -82,8 +86,8 @@ async function cargarRecords() {
             tableBody.appendChild(row);
         });
     } catch (error) {
-        console.error("Error al cargar los récords: ", error);
-        tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #ff0055;">Error al conectar con la base de datos.</td></tr>`;
+        console.error("Error al leer de Firestore: ", error);
+        tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #ff0055;">Error al cargar la base de datos.</td></tr>`;
     }
 }
 
