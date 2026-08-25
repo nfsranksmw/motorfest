@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; style-src * 'unsafe-inline';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expediente de Pilotos | BSKR Motorfest</title>
+    <title>Expediente | BSKR Motorfest</title>
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
@@ -24,44 +24,44 @@
 
     <!-- Contenido Principal -->
     <main class="main-container">
-        <h2>Expediente Oficial de Récords</h2>
-        <p style="color: #9ca3af; margin-bottom: 20px;">Los mejores tiempos y puntajes del clan en The Crew Motorfest.</p>
+        <h2>Expediente de Pilotos BSKR</h2>
+        <p style="color: #9ca3af; margin-bottom: 30px;">Selecciona un piloto para consultar sus tiempos oficiales, eventos y vehículos registrados.</p>
 
-        <!-- Filtros rápidos por categoría -->
-<div class="filter-container" style="margin-bottom: 30px; display: flex; gap: 10px; flex-wrap: wrap;">
-    <button class="filter-btn" data-category="Todos" style="background: #ffe600; color: #000; font-weight: bold;">Todos</button>
-    <button class="filter-btn" data-category="Grand Race">Grand Race</button>
-    <button class="filter-btn" data-category="Summit">Summit</button>
-    <button class="filter-btn" data-category="Playlist">Playlist</button>
-    <button class="filter-btn" data-category="Trackforge">Trackforge</button>
-</div>
-
-        <!-- Tabla Dinámica de Récords -->
-        <div style="overflow-x: auto;">
-            <table class="bskr-table">
-                <thead>
-                    <tr>
-                        <th>Piloto</th>
-                        <th>Categoría</th>
-                        <th>Pista / Evento</th>
-                        <th>Tiempo / Puntos</th>
-                        <th>Evidencia</th>
-                    </tr>
-                </thead>
-                <tbody id="records-table-body">
-                    <!-- Los récords se cargarán automáticamente aquí mediante JavaScript -->
-                    <tr>
-                        <td colspan="5" style="text-align: center; color: #6b7280;">Cargando récords del clan...</td>
-                    </tr>
-                </tbody>
-            </table>
+        <!-- Contenedor donde aparecerán las tarjetas de los pilotos -->
+        <div id="pilots-grid" class="members-grid-container">
+            <!-- Se llenará automáticamente con JavaScript -->
         </div>
+
+        <!-- Sección de Récords del Piloto Seleccionado (Oculta al inicio) -->
+        <section id="pilot-records-section" class="hidden" style="margin-top: 50px; background: #111827; border: 1px solid #1f293d; border-radius: 8px; padding: 30px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #1f293d; padding-bottom: 15px;">
+                <h3 id="selected-pilot-title" style="font-family: 'Orbitron', sans-serif; color: #ffe600; font-size: 22px;">Récords de [Piloto]</h3>
+                <button id="btn-back-to-pilots" class="btn-secondary" style="padding: 6px 12px; font-size: 12px;">← Volver al listado</button>
+            </div>
+            
+            <div style="overflow-x: auto;">
+                <table class="bskr-table">
+                    <thead>
+                        <tr>
+                            <th>Evento / Pista</th>
+                            <th>Vehículo Utilizado</th>
+                            <th>Tiempo / Puntuación</th>
+                            <th>Prueba en Video</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pilot-records-tbody">
+                        <!-- Los récords individuales del piloto se cargarán aquí -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </main>
 
     <footer>
         <p>&copy; 2026 Clan BSKR - The Crew Motorfest. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- Script de Expediente -->
     <script type="module" src="js/records.js"></script>
 </body>
 </html>
