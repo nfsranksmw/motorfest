@@ -1,0 +1,57 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBPvGd0mCaql2yMeKK3UogRBDj3Ig9EYOI",
+    authDomain: "bskrmostorfest.firebaseapp.com",
+    databaseURL: "https://bskrmostorfest-default-rtdb.firebaseio.com",
+    projectId: "bskrmostorfest",
+    storageBucket: "bskrmostorfest.firebasestorage.app",
+    messagingSenderId: "662332371404",
+    appId: "1:662332371404:web:c70d8219c6e74fafffed69",
+    measurementId: "G-WHH6X6227Z"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const membersGrid = document.getElementById('members-grid');
+
+async function cargarMiembros() {
+    if (!membersGrid) return;
+
+    try {
+        const querySnapshot = await getDocs(collection(db, "members"));
+        membersGrid.innerHTML = "";
+
+        if (querySnapshot.empty) {
+            membersGrid.innerHTML = `<p style="text-align: center; color: #6b7280; grid-column: 1 / -1;">No hay miembros registrados todavía.</p>`;
+            return;
+        }
+
+        querySnapshot.forEach((doc) => {
+            const member = doc.data();
+            
+            // Crear la tarjeta visual para cada miembro
+            const card = document.createElement('div');
+            card.className = "member-card"; // Puedes estilizar esta clase en tu CSS
+            card.style.cssText = "background: #111; border: 1px solid #333; padding: 20px; text-align: center; border-radius: 8px;";
+            
+            card.innerHTML = `
+                <img src="${member.photoUrl}" alt="${member.pilotName}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 2px solid #ffe600;">
+                <h3 style="color: #fff; font-family: 'Orbitron', sans-serif; margin-bottom: 5px;">${member.pilotName}</h3>
+                <p style="color: #ffe600; font-size: 0.85rem;">Piloto Oficial BSKR</p>
+            `;
+            
+            membersGrid.appendChild(card);
+        });
+
+    } catch (error) {
+        console.error("Error al cargar los miembros: ", error);
+        membersGrid.innerHTML = `<p style="text-align: center; color: #ff0055; grid-column: 1 / -1;">Error al cargar el directorio.</p>`;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    cargarMiembros();
+});
