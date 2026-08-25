@@ -73,7 +73,7 @@ body.bg-motorfest {
     
     /* Aquí colocamos la imagen de fondo con una capa oscura encima para que resalten las letras */
     background: linear-gradient(rgba(11, 15, 25, 0.75), rgba(11, 15, 25, 0.85)), 
-                url('../images/motorfestpagina.jpg') center/cover no-repeat;
+                url('../images/the-crew-motorfest.jpg') center/cover no-repeat;
     
     padding: 0 20px;
 }
