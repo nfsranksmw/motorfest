@@ -29,11 +29,11 @@
 
         <!-- Filtros rápidos por categoría -->
 <div class="filter-container" style="margin-bottom: 30px; display: flex; gap: 10px; flex-wrap: wrap;">
-    <button class="filter-btn active" onclick="filtrarCategoria('Todos', this)">Todos</button>
-    <button class="filter-btn" onclick="filtrarCategoria('Grand Race', this)">Grand Race</button>
-    <button class="filter-btn" onclick="filtrarCategoria('Summit', this)">Summit</button>
-    <button class="filter-btn" onclick="filtrarCategoria('Playlist', this)">Playlist</button>
-    <button class="filter-btn" onclick="filtrarCategoria('Trackforge', this)">Trackforge</button>
+    <button class="filter-btn" data-category="Todos" style="background: #ffe600; color: #000; font-weight: bold;">Todos</button>
+    <button class="filter-btn" data-category="Grand Race">Grand Race</button>
+    <button class="filter-btn" data-category="Summit">Summit</button>
+    <button class="filter-btn" data-category="Playlist">Playlist</button>
+    <button class="filter-btn" data-category="Trackforge">Trackforge</button>
 </div>
 
         <!-- Tabla Dinámica de Récords -->
