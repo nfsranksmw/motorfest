@@ -62,14 +62,19 @@ body.bg-motorfest {
     background: #cca600;
 }
 
-/* Hero Section (Inicio) */
+/* Hero Section (Inicio) - Solo debajo del menú */
 .hero {
-    height: 80vh;
+    height: calc(80vh - 80px); /* Ajusta la altura restando el espacio del menú */
+    min-height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: linear-gradient(rgba(11,15,25,0.7), rgba(11,15,25,0.9)), url('../images/motorfest-bg.jpg') center/cover;
+    
+    /* Aquí colocamos la imagen de fondo con una capa oscura encima para que resalten las letras */
+    background: linear-gradient(rgba(11, 15, 25, 0.75), rgba(11, 15, 25, 0.85)), 
+                url('../images/motorfestpagina.jpg') center/cover no-repeat;
+    
     padding: 0 20px;
 }
 
