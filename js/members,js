@@ -15,42 +15,45 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const membersContainer = document.getElementById('members-container');
+// Apuntamos al ID exacto que tienes en tu HTML: "members-grid"
+const membersGrid = document.getElementById('members-grid');
 
 async function cargarMiembrosDinamicos() {
-    if (!membersContainer) return;
+    if (!membersGrid) return;
 
     try {
         const querySnapshot = await getDocs(collection(db, "members"));
         
-        if (querySnapshot.empty) return;
+        membersGrid.innerHTML = "";
 
-        // Limpiamos el contenido estático de prueba y cargamos los reales de Firestore
-        membersContainer.innerHTML = "";
+        if (querySnapshot.empty) {
+            membersGrid.innerHTML = `<p style="text-align: center; color: #6b7280; grid-column: 1 / -1;">No hay miembros registrados todavía.</p>`;
+            return;
+        }
 
         querySnapshot.forEach((doc) => {
             const member = doc.data();
             
             const card = document.createElement('div');
-            card.className = "member-box"; // O la clase CSS que use tu diseño
-            card.style.cssText = "background: #121214; border: 1px solid #222; border-radius: 12px; overflow: hidden; text-align: center; margin-bottom: 20px;";
+            card.style.cssText = "background: #111; border: 1px solid #333; border-radius: 12px; overflow: hidden; text-align: center; padding-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);";
             
             card.innerHTML = `
-                <div style="height: 120px; overflow: hidden; background: #000;">
-                    <img src="${member.photoUrl}" alt="${member.pilotName}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+                <div style="height: 120px; overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center;">
+                    <img src="${member.photoUrl}" alt="${member.pilotName}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #ffe600; margin-top: 20px;">
                 </div>
-                <div style="padding: 20px;">
+                <div style="padding: 20px 15px 10px 15px;">
                     <h3 style="color: #fff; font-family: 'Orbitron', sans-serif; font-size: 1.1rem; margin-bottom: 5px;">[BSKR] ${member.pilotName}</h3>
-                    <p style="color: #ffe600; font-size: 0.85rem; margin-bottom: 5px;">Piloto Oficial BSKR</p>
-                    <p style="color: #9ca3af; font-size: 0.75rem;">${member.email}</p>
+                    <p style="color: #ffe600; font-size: 0.85rem; font-weight: bold; margin-bottom: 8px;">Piloto Oficial / Motorfest</p>
+                    <p style="color: #9ca3af; font-size: 0.75rem; word-break: break-all;">${member.email}</p>
                 </div>
             `;
             
-            membersContainer.appendChild(card);
+            membersGrid.appendChild(card);
         });
 
     } catch (error) {
-        console.error("Error al cargar el directorio de miembros: ", error);
+        console.error("Error al cargar los miembros: ", error);
+        membersGrid.innerHTML = `<p style="text-align: center; color: #ff0055; grid-column: 1 / -1;">Error al cargar el directorio.</p>`;
     }
 }
 
