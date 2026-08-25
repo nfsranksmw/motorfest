@@ -354,3 +354,19 @@ footer {
     font-size: 14px;
     border-top: 1px solid #1f293d;
 }
+.filter-btn {
+    background: #1a1a1a;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    border-color: #ffe600;
+    color: #ffe600;
+}
