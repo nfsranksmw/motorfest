@@ -94,3 +94,84 @@ async function cargarRecords() {
 if (tableBody) {
     cargarRecords();
 }
+// Variable global para guardar los récords y filtrarlos sin recargar
+let todosLosRecords = [];
+
+const tableBody = document.getElementById('records-table-body');
+
+async function cargarRecords() {
+    if (!tableBody) return;
+
+    try {
+        const querySnapshot = await getDocs(collection(db, "records"));
+        
+        tableBody.innerHTML = ""; 
+
+        if (querySnapshot.empty) {
+            tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #6b7280;">No hay récords registrados todavía. ¡Sé el primero!</td></tr>`;
+            return;
+        }
+
+        todosLosRecords = []; // Limpiar array
+        querySnapshot.forEach((doc) => {
+            todosLosRecords.push(doc.data());
+        });
+
+        // Mostrar todos por defecto
+        pintarTabla(todosLosRecords);
+
+    } catch (error) {
+        console.error("Error al leer de Firestore: ", error);
+        tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #ff0055;">Error al cargar la base de datos.</td></tr>`;
+    }
+}
+
+// Función para pintar la tabla dinámicamente
+function pintarTabla(records) {
+    if (!tableBody) return;
+    tableBody.innerHTML = "";
+
+    if (records.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #6b7280;">No hay récords en esta categoría.</td></tr>`;
+        return;
+    }
+
+    records.forEach((data) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td><strong>${data.pilot}</strong></td>
+            <td><span style="color: #ffe600; font-weight: bold;">${data.category}</span></td>
+            <td>${data.track}</td>
+            <td>${data.timeScore}</td>
+            <td><a href="${data.videoUrl}" target="_blank" class="link-video">Ver Video 🎥</a></td>
+        `;
+        tableBody.appendChild(row);
+    });
+}
+
+// Función global de filtrado por categoría al hacer clic en los botones
+window.filtrarCategoria = function(categoria, botonElemento) {
+    // Cambiar estilo visual de los botones activos
+    const botones = document.querySelectorAll('.filter-btn');
+    botones.keyValues?.forEach(b => b.classList.remove('active'));
+    // O de forma más limpia:
+    botones.forEach(btn => btn.style.background = '#1a1a1a'); // Color inactivo
+    botones.forEach(btn => btn.style.color = '#fff');
+    
+    if(botonElemento) {
+        botonElemento.style.background = '#ffe600'; // Amarillo Motorfest
+        botonElemento.style.color = '#000';
+        botonElemento.style.fontWeight = 'bold';
+    }
+
+    if (categoria === 'Todos') {
+        pintarTabla(todosLosRecords);
+    } else {
+        const filtrados = todosLosRecords.filter(r => r.category === categoria);
+        pintarTabla(filtrados);
+    }
+};
+
+if (tableBody) {
+    cargarRecords();
+}
