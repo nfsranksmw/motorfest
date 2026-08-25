@@ -59,11 +59,39 @@
         </select>
     </div>
 
+    <!-- Nombre de la Pista / Evento -->
     <div class="input-group">
         <label>Nombre de la Pista / Evento</label>
         <input type="text" id="record-track" required placeholder="Ej: Tour Oahu">
     </div>
 
+    <!-- Categoría del Vehículo (Selector) -->
+    <div class="input-group">
+        <label>Categoría de Vehículo</label>
+        <select id="car-category-select" required>
+            <option value="">Selecciona categoría de vehículo</option>
+            <option value="Street / Tier 1">Street / Tier 1</option>
+            <option value="Street / Tier 2">Street / Tier 2</option>
+            <option value="Hypercar">Hypercar</option>
+            <option value="Racing / Track">Racing / Track</option>
+            <option value="Rally / Offroad">Rally / Offroad</option>
+            <option value="Rally Raid / Offroad">Rally Raid / Offroad</option>
+            <option value="Cup Car">Cup Car</option>
+            <option value="Motocross">Motocross</option>
+            <option value="Monster Truck">Monster Truck</option>
+            <option value="Avión">Avión</option>
+            <option value="Lancha">Lancha</option>
+            <option value="Drag">Drag</option>
+        </select>
+    </div>
+
+    <!-- Vehículo Utilizado (Texto Libre) -->
+    <div class="input-group">
+        <label>Modelo de Vehículo Utilizado</label>
+        <input type="text" id="car-input" placeholder="Ej: Nissan GT-R R35 Performance" required>
+    </div>
+
+    <!-- Tiempo / Puntuación -->
     <div class="input-group">
         <label>Tiempo / Puntuación</label>
         <input type="text" id="record-time" required placeholder="Ej: 02:14.560">
