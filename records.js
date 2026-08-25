@@ -27,22 +27,29 @@ async function cargarExpedientes() {
     try {
         pilotsGrid.innerHTML = `<p style="color: #9ca3af; grid-column: 1 / -1;">Cargando registros de pilotos...</p>`;
         
-        // Suponemos que tus récords se guardan en una colección llamada "records" en Firebase
-        // Cada documento debe tener campos como: pilotName, event, car, time, videoUrl (opcional)
         const querySnapshot = await getDocs(collection(db, "records"));
         
         pilotsGrid.innerHTML = "";
 
+        let recordsArray = [];
+
         if (querySnapshot.empty) {
-            pilotsGrid.innerHTML = `<p style="text-align: center; color: #6b7280; grid-column: 1 / -1;">No hay récords publicados todavía en el expediente.</p>`;
-            return;
+            console.warn("Firebase no tiene registros aún. Usando datos de prueba.");
+            // Datos de prueba para que las tarjetas se dibujen obligatoriamente y veas el funcionamiento
+            recordsArray = [
+                { pilotName: "NeonQueen", event: "Grand Race - Oahu", car: "Nissan GT-R R35", time: "01:42.500", videoUrl: "#" },
+                { pilotName: "Zimanx", event: "Summit Contest", car: "Porsche 911 GT3", time: "00:58.120", videoUrl: "#" }
+            ];
+        } else {
+            querySnapshot.forEach((doc) => {
+                recordsArray.push(doc.data());
+            });
         }
 
         // Agrupamos los récords por nombre de piloto
         const pilotosMap = {};
-        querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            const piloto = data.pilotName || "Piloto Anónimo";
+        recordsArray.forEach((data) => {
+            const piloto = data.pilotName || data.nombre || "Piloto Anónimo";
             
             if (!pilotosMap[piloto]) {
                 pilotosMap[piloto] = [];
@@ -50,7 +57,7 @@ async function cargarExpedientes() {
             pilotosMap[piloto].push(data);
         });
 
-        // Dibujamos una tarjeta por cada piloto encontrado en la base de datos
+        // Dibujamos las tarjetas en pantalla
         Object.keys(pilotosMap).forEach((nombrePiloto) => {
             const recordsDelPiloto = pilotosMap[nombrePiloto];
             
@@ -66,7 +73,7 @@ async function cargarExpedientes() {
                 </div>
             `;
 
-            // Al hacer clic en la tarjeta, ocultamos el grid y mostramos la tabla de este piloto específico
+            // Al hacer clic, muestra la tabla del piloto
             card.addEventListener('click', () => {
                 mostrarDetallePiloto(nombrePiloto, recordsDelPiloto);
             });
@@ -76,7 +83,7 @@ async function cargarExpedientes() {
 
     } catch (error) {
         console.error("Error al cargar los récords: ", error);
-        pilotsGrid.innerHTML = `<p style="text-align: center; color: #ff0055; grid-column: 1 / -1;">Error al conectar con la base de datos de récords.</p>`;
+        pilotsGrid.innerHTML = `<p style="text-align: center; color: #ff0055; grid-column: 1 / -1;">Error al conectar con la base de datos. Revisa la consola (F12).</p>`;
     }
 }
 
@@ -93,7 +100,7 @@ function mostrarDetallePiloto(nombre, records) {
             <td>${rec.event || 'Evento General'}</td>
             <td>${rec.car || 'No especificado'}</td>
             <td style="color: #ffe600; font-weight: bold;">${rec.time || 'N/A'}</td>
-            <td>${rec.videoUrl ? `<a href="${rec.videoUrl}" target="_blank" class="link-video">Ver Prueba</a>` : 'Sin video'}</td>
+            <td>${rec.videoUrl && rec.videoUrl !== "#" ? `<a href="${rec.videoUrl}" target="_blank" class="link-video">Ver Prueba</a>` : 'Sin video'}</td>
         `;
         pilotRecordsTbody.appendChild(tr);
     });
