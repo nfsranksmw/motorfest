@@ -56,17 +56,37 @@ if (btnLogout) {
     });
 }
 
-onAuthStateChanged(auth, (user) => {
+import { doc, setDoc, getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const db = getFirestore(app);
+
+onAuthStateChanged(auth, async (user) => {
     if (user) {
         if (authSection) authSection.classList.add('hidden');
         if (dashboardSection) dashboardSection.classList.remove('hidden');
+        
+        const pilotName = user.email.split('@')[0].toUpperCase();
         if (userTagDisplay) {
-            userTagDisplay.textContent = user.email.split('@')[0].toUpperCase();
+            userTagDisplay.textContent = pilotName;
         }
+
+        // GUARDAR O ACTUALIZAR AL PILOTO EN LA COLECCIÓN "members" AUTOMÁTICAMENTE
+        try {
+            const userRef = doc(db, "members", user.uid);
+            await setDoc(userRef, {
+                uid: user.uid,
+                pilotName: pilotName,
+                email: user.email,
+                // Imagen por defecto de avatar o la de su perfil de Google si la hubiera
+                photoUrl: user.photoURL || "https://api.dicebear.com/7.x/bottts/svg?seed=" + pilotName,
+                lastLogin: new Date()
+            }, { merge: true }); // { merge: true } evita que se sobrescriba si ya existe
+        } catch (error) {
+            console.error("Error al registrar miembro automáticamente: ", error);
+        }
+
     } else {
         if (authSection) authSection.classList.remove('hidden');
         if (dashboardSection) dashboardSection.classList.add('hidden');
     }
 });
-
-export { auth };
