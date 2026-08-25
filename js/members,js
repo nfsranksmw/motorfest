@@ -15,7 +15,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Apuntamos al ID exacto que tienes en tu HTML: "members-grid"
 const membersGrid = document.getElementById('members-grid');
 
 async function cargarMiembrosDinamicos() {
@@ -34,17 +33,16 @@ async function cargarMiembrosDinamicos() {
         querySnapshot.forEach((doc) => {
             const member = doc.data();
             
+            // Creamos la tarjeta usando tus clases de CSS oficiales
             const card = document.createElement('div');
-            card.style.cssText = "background: #111; border: 1px solid #333; border-radius: 12px; overflow: hidden; text-align: center; padding-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);";
+            card.className = "member-card";
             
             card.innerHTML = `
-                <div style="height: 120px; overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center;">
-                    <img src="${member.photoUrl}" alt="${member.pilotName}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #ffe600; margin-top: 20px;">
-                </div>
-                <div style="padding: 20px 15px 10px 15px;">
-                    <h3 style="color: #fff; font-family: 'Orbitron', sans-serif; font-size: 1.1rem; margin-bottom: 5px;">[BSKR] ${member.pilotName}</h3>
-                    <p style="color: #ffe600; font-size: 0.85rem; font-weight: bold; margin-bottom: 8px;">Piloto Oficial / Motorfest</p>
-                    <p style="color: #9ca3af; font-size: 0.75rem; word-break: break-all;">${member.email}</p>
+                <div class="member-avatar" style="background-image: url('${member.photoUrl}');"></div>
+                <div class="member-info">
+                    <h3>[BSKR] ${member.pilotName}</h3>
+                    <div class="member-role">Piloto Oficial BSKR</div>
+                    <div class="member-car" style="word-break: break-all;">${member.email}</div>
                 </div>
             `;
             
