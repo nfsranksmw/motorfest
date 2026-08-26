@@ -90,3 +90,53 @@ onAuthStateChanged(auth, async (user) => {
         if (dashboardSection) dashboardSection.classList.add('hidden');
     }
 });
+// ==========================================
+// LÓGICA DE ENVÍO DE RÉCORDS (Añadir al final de auth.js)
+// ==========================================
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const recordForm = document.getElementById('record-form');
+
+if (recordForm) {
+    recordForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Validar que el usuario esté autenticado
+        const currentUser = auth.currentUser;
+        if (!currentUser) {
+            alert("Debes iniciar sesión para publicar un récord.");
+            return;
+        }
+
+        const pilotName = currentUser.email.split('@')[0].toUpperCase();
+
+        // Capturar los valores exactos de los inputs y selects de ingreso.html
+        const categoryVal = document.getElementById('record-category').value;
+        const trackVal = document.getElementById('record-track').value;
+        const carCategoryVal = document.getElementById('car-category-select').value;
+        const carVal = document.getElementById('car-input').value;
+        const timeVal = document.getElementById('record-time').value;
+        const videoVal = document.getElementById('record-video').value;
+
+        try {
+            // Guardar en la colección "records" que lee records.js
+            await addDoc(collection(db, "records"), {
+                pilot: pilotName,
+                category: categoryVal,       // Grand Race, Summit, Playlist, Trackforge
+                track: trackVal,             // Pista / Evento
+                carCategory: carCategoryVal, // Clase de vehículo (Street, Hypercar, etc.)
+                car: carVal,                 // Modelo del vehículo
+                timeScore: timeVal,          // Tiempo o Puntuación
+                videoUrl: videoVal,          // URL del video de evidencia
+                createdAt: new Date()
+            });
+
+            alert("¡Récord publicado con éxito en el expediente!");
+            recordForm.reset(); // Limpia el formulario tras el éxito
+
+        } catch (error) {
+            console.error("Error al publicar el récord: ", error);
+            alert("Hubo un error al registrar en la base de datos: " + error.message);
+        }
+    });
+}
