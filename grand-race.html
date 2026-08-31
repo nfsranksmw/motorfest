@@ -82,17 +82,30 @@
 
     <!-- Script de Sincronización Automática por Bloques de Tiempo -->
     <script>
-        // Tabla de rotaciones programadas basada en los horarios oficiales
+        // Tabla de rotaciones programadas ampliada con los horarios reales de la temporada
         const rotacionesGrandRace = [
             { hora: "14:50", ubicacion: "Kahakuloa", categorias: "STREET TIER 1 <span>&raquo;</span> RALLY <span>&raquo;</span> STREET TIER 2" },
-            { hora: "15:00", ubicacion: "Kalaeloa", categorias: "ALPHA GP <span>&raquo;</span> HYPER <span>&raquo;</span> STREET TIER 1" },
+            { hora: "15:10", ubicacion: "Kalaeloa", categorias: "ALPHA GP <span>&raquo;</span> HYPER <span>&raquo;</span> STREET TIER 1" },
             { hora: "15:30", ubicacion: "Mauna Pele", categorias: "RACING <span>&raquo;</span> ALPHA GP <span>&raquo;</span> STREET TIER 2" },
             { hora: "15:50", ubicacion: "Wahiawa Fields", categorias: "ALPHA GP <span>&raquo;</span> RACING <span>&raquo;</span> RALLY" },
             { hora: "16:10", ubicacion: "Diamond Head", categorias: "ALPHA GP <span>&raquo;</span> RALLY <span>&raquo;</span> RACING" },
             { hora: "16:30", ubicacion: "Kaena Point", categorias: "STREET TIER 1 <span>&raquo;</span> MOTOCROSS <span>&raquo;</span> RALLY RAID" },
             { hora: "16:50", ubicacion: "Diamond Head", categorias: "RACING <span>&raquo;</span> HYPER <span>&raquo;</span> STREET TIER 2" },
             { hora: "17:10", ubicacion: "Kaena Point", categorias: "ALPHA GP <span>&raquo;</span> STREET TIER 2 <span>&raquo;</span> HYPER" },
-            { hora: "17:30", ubicacion: "Kaneohe", categorias: "RALLY RAID <span>&raquo;</span> STREET TIER 1 <span>&raquo;</span> RACING" }
+            { hora: "17:30", ubicacion: "Kaneohe", categorias: "RALLY RAID <span>&raquo;</span> STREET TIER 1 <span>&raquo;</span> RACING" },
+            { hora: "17:50", ubicacion: "Haleiwa", categorias: "HYPER <span>&raquo;</span> RACING <span>&raquo;</span> STREET TIER 2" },
+            { hora: "18:10", ubicacion: "Ma'akua Black Beach", categorias: "STREET TIER 2 <span>&raquo;</span> RALLY RAID <span>&raquo;</span> RACING" },
+            { hora: "18:30", ubicacion: "Haleiwa", categorias: "RALLY <span>&raquo;</span> ALPHA GP <span>&raquo;</span> RACING" },
+            { hora: "18:50", ubicacion: "Waikiki", categorias: "RACING <span>&raquo;</span> HYPER <span>&raquo;</span> STREET TIER 2" },
+            { hora: "19:10", ubicacion: "Wailea", categorias: "ALPHA GP <span>&raquo;</span> HYPER <span>&raquo;</span> RACING" },
+            { hora: "19:30", ubicacion: "Kalaeloa", categorias: "MOTOCROSS <span>&raquo;</span> RALLY <span>&raquo;</span> DRIFT" },
+            { hora: "19:50", ubicacion: "Wahiawa Fields", categorias: "ALPHA GP <span>&raquo;</span> STREET TIER 2 <span>&raquo;</span> HYPER" },
+            { hora: "20:10", ubicacion: "Mauna Pele", categorias: "RALLY <span>&raquo;</span> STREET TIER 1 <span>&raquo;</span> HYPER" },
+            { hora: "20:30", ubicacion: "Kalaeloa", categorias: "STREET TIER 1 <span>&raquo;</span> RALLY RAID <span>&raquo;</span> HYPER" },
+            { hora: "20:50", ubicacion: "Nuuanu - Punchbowl", categorias: "MOTOCROSS <span>&raquo;</span> MONSTER <span>&raquo;</span> RALLY" },
+            { hora: "21:10", ubicacion: "Kahuku", categorias: "RACING <span>&raquo;</span> RALLY <span>&raquo;</span> ALPHA GP" },
+            { hora: "21:30", ubicacion: "Ma'akua Black Beach", categorias: "HYPER <span>&raquo;</span> STREET TIER 2 <span>&raquo;</span> ALPHA GP" },
+            { hora: "21:50", ubicacion: "Wailea", categorias: "STREET TIER 2 <span>&raquo;</span> HYPER <span>&raquo;</span> RACING" }
         ];
 
         function actualizarCarreraEnVivo() {
