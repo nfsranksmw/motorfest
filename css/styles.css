@@ -1,5 +1,5 @@
 /* ==========================================
-   ESTILOS GENERALES CLAN BSKR - MOTORFEST
+   ESTILOS GENERALES CLAN BSKR - MOTORFEST (Tono exacto optimizado)
    ========================================== */
 * {
     margin: 0;
@@ -9,7 +9,7 @@
 
 body.bg-motorfest {
     font-family: 'Inter', sans-serif;
-    background-color: #0b0f19;
+    background-color: #121212; /* El tono negro exacto */
     color: #f3f4f6;
 }
 
@@ -19,8 +19,8 @@ body.bg-motorfest {
     justify-content: space-between;
     align-items: center;
     padding: 20px 5%;
-    background: rgba(11, 15, 25, 0.95);
-    border-bottom: 2px solid #1f293d;
+    background: rgba(18, 18, 18, 0.95);
+    border-bottom: 1px solid #222222;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -35,46 +35,54 @@ body.bg-motorfest {
 }
 
 .logo span {
-    color: #ffe600; /* Amarillo Motorfest */
+    color: #ffe600;
 }
 
+/* ==========================================
+   ESTILO CYBERPUNK PARA EL MENÚ DE NAVEGACIÓN
+   ========================================== */
 .navbar nav a {
+    font-family: 'Orbitron', sans-serif !important; /* Fuente futurista */
+    font-size: 13px !important;
     color: #9ca3af;
     text-decoration: none;
     margin-left: 25px;
     font-weight: 600;
-    transition: color 0.3s;
+    letter-spacing: 1.5px !important; /* Separación HUD/Cyberpunk */
+    text-transform: uppercase !important; /* Todo en mayúsculas */
+    transition: all 0.3s ease !important;
 }
 
 .navbar nav a:hover, .navbar nav a.active {
-    color: #ffe600; /* Amarillo Motorfest */
+    color: #ffe600 !important;
+    text-shadow: 0 0 8px rgba(255, 230, 0, 0.6) !important; /* Brillo cyberpunk */
 }
 
 .btn-login {
-    background: #ffe600; /* Amarillo Motorfest */
-    color: #0b0f19 !important;
+    background: #ffe600;
+    color: #121212 !important;
     padding: 8px 16px;
     border-radius: 4px;
     font-weight: bold;
+    font-family: 'Orbitron', sans-serif !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
 }
 
 .btn-login:hover {
     background: #cca600;
 }
 
-/* Hero Section (Inicio) - Solo debajo del menú */
+/* Hero Section (Inicio) */
 .hero {
-    height: calc(80vh - 80px); /* Ajusta la altura restando el espacio del menú */
+    height: calc(80vh - 80px);
     min-height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    
-    /* Aquí colocamos la imagen de fondo con una capa oscura encima para que resalten las letras */
-    background: linear-gradient(rgba(11, 15, 25, 0.75), rgba(11, 15, 25, 0.85)), 
+    background: linear-gradient(rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 0.9)), 
                 url('../images/the-crew-motorfest.jpg') center/cover no-repeat;
-    
     padding: 0 20px;
 }
 
@@ -83,7 +91,7 @@ body.bg-motorfest {
     font-size: 48px;
     margin-bottom: 15px;
     color: #fff;
-    text-shadow: 0 0 10px rgba(255,230,0,0.5); /* Brillo amarillo */
+    text-shadow: 0 0 10px rgba(255,230,0,0.5);
 }
 
 .hero-content p {
@@ -95,8 +103,8 @@ body.bg-motorfest {
 
 .btn-primary {
     display: inline-block;
-    background: #ffe600; /* Amarillo Motorfest */
-    color: #0b0f19;
+    background: #ffe600;
+    color: #121212;
     padding: 12px 28px;
     border-radius: 4px;
     text-decoration: none;
@@ -121,7 +129,7 @@ body.bg-motorfest {
     font-family: 'Orbitron', sans-serif;
     font-size: 32px;
     margin-bottom: 20px;
-    color: #ffe600; /* Amarillo Motorfest */
+    color: #ffe600;
 }
 
 /* Formularios y Panel de Ingreso */
@@ -134,13 +142,13 @@ body.bg-motorfest {
 }
 
 .form-box {
-    background: #111827;
-    border: 1px solid #1f293d;
+    background: #1a1a1a;
+    border: 1px solid #282828;
     padding: 30px;
-    border-radius: 8px;
+    border-radius: 12px;
     width: 100%;
     max-width: 450px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
 }
 
 .form-box h2 {
@@ -171,16 +179,16 @@ body.bg-motorfest {
 .input-group input, .input-group select {
     width: 100%;
     padding: 10px;
-    background: #0b0f19;
-    border: 1px solid #374151;
-    border-radius: 4px;
+    background: #121212;
+    border: 1px solid #2a2a2a;
+    border-radius: 6px;
     color: #fff;
     font-size: 14px;
 }
 
 .input-group input:focus, .input-group select:focus {
     outline: none;
-    border-color: #ffe600; /* Borde amarillo al enfocar */
+    border-color: #ffe600;
 }
 
 .full-width {
@@ -191,10 +199,10 @@ body.bg-motorfest {
 
 .btn-secondary {
     background: transparent;
-    border: 1px solid #ffe600; /* Borde amarillo */
+    border: 1px solid #ffe600;
     color: #ffe600;
     padding: 10px 16px;
-    border-radius: 4px;
+    border-radius: 6px;
     font-family: 'Orbitron', sans-serif;
     font-weight: bold;
     transition: 0.2s;
@@ -214,37 +222,52 @@ body.bg-motorfest {
     margin-top: 10px;
 }
 
-/* Estilos para la tabla del expediente */
+/* ==========================================
+   ESTILOS CORREGIDOS: EXPEDIENTE Y TABLAS
+   ========================================== */
+
+/* Forzar contenedor externo del expediente a neutral oscuro */
+div[style*="background"], 
+.bskr-table-container, 
+section.main-container > div {
+    background-color: #121212 !important;
+}
+
 .bskr-table {
     width: 100%;
     border-collapse: collapse;
-    background: #111827;
-    border-radius: 8px;
+    background: #1a1a1a !important; /* Tarjeta contenedora de la tabla limpia */
+    border: 1px solid #282828 !important;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
 }
 
 .bskr-table th, .bskr-table td {
     padding: 15px;
     text-align: left;
-    border-bottom: 1px solid #1f293d;
+    border-bottom: 1px solid #282828 !important;
     font-size: 14px;
 }
 
 .bskr-table th {
-    background: #1f293d;
+    background: #222222 !important; /* Cabecera neutral */
     font-family: 'Orbitron', sans-serif;
-    color: #ffe600; /* Amarillo Motorfest */
+    color: #ffe600;
     font-size: 13px;
     letter-spacing: 1px;
 }
 
+.bskr-table tr {
+    background-color: #1a1a1a !important;
+}
+
 .bskr-table tr:hover {
-    background: rgba(255, 230, 0, 0.03);
+    background: rgba(255, 230, 0, 0.03) !important;
 }
 
 .link-video {
-    color: #ffe600; /* Amarillo Motorfest */
+    color: #ffe600;
     text-decoration: none;
     font-weight: 600;
 }
@@ -262,18 +285,18 @@ body.bg-motorfest {
 }
 
 .member-card {
-    background: #111827;
-    border: 1px solid #1f293d;
-    border-radius: 8px;
+    background: #1a1a1a;
+    border: 1px solid #282828;
+    border-radius: 12px;
     overflow: hidden;
     text-align: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    transition: transform 0.2s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    transition: transform 0.2s, border-color 0.2s;
 }
 
 .member-card:hover {
     transform: translateY(-5px);
-    border-color: #ffe600; /* Amarillo Motorfest */
+    border-color: #ffe600;
 }
 
 .member-avatar {
@@ -293,7 +316,7 @@ body.bg-motorfest {
 }
 
 .member-role {
-    color: #ffe600; /* Amarillo Motorfest */
+    color: #ffe600;
     font-size: 13px;
     font-weight: 600;
     margin-bottom: 10px;
@@ -304,20 +327,30 @@ body.bg-motorfest {
     font-size: 13px;
 }
 
-/* Tarjetas de Tuneo (Setups) */
-.setups-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
+/* Tarjetas de Tuneo (Setups / ProSettings) */
+.setups-grid, .prosetup-card, .category-card {
+    background: #1a1a1a !important;
+    border: 1px solid #282828 !important;
+    border-radius: 12px !important;
 }
 
+/* Contenedor optimizado para que no se vea angosto */
+#setups-container {
+    max-width: 1150px !important;
+    width: 100% !important;
+    margin: 0 auto;
+}
+
+/* Forzar que la tarjeta principal expanda su ancho al 100% del contenedor */
 .setup-card {
-    background: #111827;
-    border: 1px solid #1f293d;
-    border-radius: 8px;
-    padding: 25px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    border-left: 4px solid #ffe600; /* Borde izquierdo Amarillo Motorfest */
+    background: #1a1a1a !important;
+    border: 1px solid rgba(255, 230, 0, 0.3) !important;
+    border-radius: 14px !important;
+    padding: 35px !important;
+    margin-bottom: 30px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.8) !important;
 }
 
 .setup-card h3 {
@@ -327,7 +360,7 @@ body.bg-motorfest {
 }
 
 .setup-author, .setup-category {
-    font-size: 13px;
+    font-size: 15px;
     color: #9ca3af;
     margin-bottom: 5px;
 }
@@ -336,11 +369,11 @@ body.bg-motorfest {
     list-style: none;
     margin-top: 15px;
     padding-top: 15px;
-    border-top: 1px solid #1f293d;
+    border-top: 1px solid #282828;
 }
 
 .setup-list li {
-    font-size: 13px;
+    font-size: 15px;
     color: #d1d5db;
     margin-bottom: 8px;
     display: flex;
@@ -348,24 +381,122 @@ body.bg-motorfest {
 }
 
 .setup-list li span {
-    color: #ffe600; /* Amarillo Motorfest */
+    color: #ffe600;
+}
+
+/* Tarjetas de categorías */
+.category-card {
+    background: #1a1a1a !important;
+    border: 1px solid #282828 !important;
+    padding: 20px;
+    border-radius: 12px !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.category-card:hover {
+    border-color: #ffe600 !important;
+    transform: translateY(-2px);
+}
+
+.category-info h4 {
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.category-models {
+    color: #9ca3af;
+    font-size: 0.85rem;
+}
+
+/* Cajas internas de los sliders y estadísticas con bordes definidos */
+.section-box {
+    background: #141414 !important;
+    border: 1px solid #333333 !important; /* Borde más claro para que resalten perfectamente */
+    border-radius: 10px !important;
+    padding: 18px 22px !important;
+    margin-bottom: 18px !important;
+    transition: border-color 0.2s ease;
+}
+
+.section-box:hover {
+    border-color: rgba(255, 230, 0, 0.5) !important;
+}
+
+.section-box h4 {
+    font-family: 'Orbitron', sans-serif;
+    color: #ffe600;
+    font-size: 15px !important;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Sliders y textos internos optimizados con tamaño de letra cómodo */
+.slider-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    font-size: 15px !important;
+    color: #d1d5db;
+}
+
+.slider-bar {
+    flex: 1;
+    height: 4px;
+    background: #2a2a2a;
+    border-radius: 2px;
+    position: relative;
+}
+
+.slider-dot {
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border: 2px solid #ffe600;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Aumento de tamaño para estadísticas de rendimiento y elementos de texto en la tarjeta */
+.setup-card .section-box table td, 
+.setup-card .section-box div, 
+.setup-card div[style*="Performance Stats"] + div,
+.setup-card .section-box span,
+.setup-card .input-group,
+.setup-card label,
+.setup-card span {
+    font-size: 15px !important;
+}
+
+.setup-card h2, .setup-card h3 {
+    font-size: 24px !important;
 }
 
 /* Footer */
 footer {
     text-align: center;
     padding: 20px;
-    background: #07090f;
+    background: #0d0d0d;
     color: #6b7280;
     font-size: 14px;
-    border-top: 1px solid #1f293d;
+    border-top: 1px solid #222222;
 }
+
 .filter-btn {
     background: #1a1a1a;
     color: #fff;
-    border: 1px solid #333;
+    border: 1px solid #282828;
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-family: 'Orbitron', sans-serif;
     font-size: 0.9rem;
@@ -375,4 +506,255 @@ footer {
 .filter-btn:hover {
     border-color: #ffe600;
     color: #ffe600;
+}
+
+/* ==========================================
+   MEJORA DE LEGIBILIDAD EN TIEMPOS / NÚMEROS (EXPEDIENTE)
+   ========================================== */
+.bskr-table td:nth-child(3), 
+.bskr-table tr td:nth-child(3) {
+    font-family: 'Inter', sans-serif !important; /* Fuente limpia para los números */
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    color: #ffe600 !important; /* Mantiene el amarillo corporativo pero súper legible */
+}
+/* ==========================================
+   ESTILOS PARA LA SECCIÓN DE GRAND RACE (EN VIVO)
+   ========================================== */
+
+.grand-race-section {
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.season-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.season-header h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 36px;
+    color: #ffe600;
+    margin-bottom: 5px;
+}
+
+.season-header p {
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+/* Tarjeta Principal "Live Now" */
+.live-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 230, 0, 0.4);
+    border-radius: 14px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.8);
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #ff3b30;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.live-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ff3b30;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff3b30;
+    animation: pulse-red 1.5s infinite;
+}
+
+@keyframes pulse-red {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 15px #ff3b30; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.live-info h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.live-info h3 span {
+    color: #ffe600;
+    margin: 0 5px;
+}
+
+.location-tag {
+    color: #9ca3af;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.timer-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #121212;
+    border: 1px solid #333;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: 'Orbitron', sans-serif;
+    color: #ffe600;
+    font-size: 16px;
+}
+
+.timer-box span {
+    color: #9ca3af;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.live-logo-text {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 38px;
+    font-weight: 900;
+    font-style: italic;
+    color: #ffe600;
+    text-align: right;
+    line-height: 1;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+}
+
+/* Botones de acción */
+.action-buttons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.btn-action-box {
+    background: #1a1a1a;
+    border: 1px solid #282828;
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: block;
+}
+
+.btn-action-box:hover {
+    border-color: #ffe600;
+    color: #ffe600;
+    background: rgba(255, 230, 0, 0.03);
+}
+
+.btn-full {
+    grid-column: span 2;
+    background: #1a1a1a;
+    border: 1px solid #282828;
+    color: #fff;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-full:hover {
+    border-color: #ffe600;
+    color: #ffe600;
+}
+
+/* Sección "Up Next" (Próximas Carreras) */
+.up-next-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.up-next-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.next-card {
+    background: #1a1a1a;
+    border: 1px solid #282828;
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    transition: border-color 0.2s;
+}
+
+.next-card:hover {
+    border-color: rgba(255, 230, 0, 0.4);
+}
+
+.time-pill {
+    display: inline-block;
+    background: #121212;
+    border: 1px solid #333;
+    color: #ffe600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.next-card h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.next-card h4 span {
+    color: #ffe600;
+}
+
+.next-card .location-tag {
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.card-footer-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #6b7280;
+    font-size: 12px;
+    border-top: 1px solid #222;
+    padding-top: 12px;
+}
+
+.card-footer-info span {
+    font-family: 'Orbitron', sans-serif;
+    color: #9ca3af;
+    font-size: 11px;
 }

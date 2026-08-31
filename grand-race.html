@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Race Live | BSKR Motorfest</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-motorfest text-white">
+
+    <!-- Navegación -->
+    <header class="navbar">
+        <div class="logo">B<span>SKR</span></div>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="expediente.html">Expediente</a>
+            <a href="miembros.html">Miembros</a>
+            <a href="tuneo.html">Tuneo</a>
+            <a href="grand-race.html" class="active">Grand Race</a>
+            <a href="ingreso.html" class="btn-login">Acceso / Perfil</a>
+        </nav>
+    </header>
+
+    <!-- Contenido Principal Grand Race -->
+    <main class="main-container">
+        <div class="grand-race-section">
+            
+            <!-- Cabecera de Temporada -->
+            <div class="season-header">
+                <h2>Season 10</h2>
+                <p>If You See Errors Please Give A Time And Event Details Through Bug Button.</p>
+            </div>
+
+            <!-- EN VIVO / LIVE NOW (Dinámico) -->
+            <div class="live-badge">
+                <div class="live-dot"></div> Live Now
+            </div>
+
+            <div class="live-card">
+                <div class="live-info">
+                    <div style="font-size: 12px; color: #9ca3af; margin-bottom: 5px;">Grand Race &bull; Live Schedule</div>
+                    <!-- Elementos que se actualizarán automáticamente mediante script -->
+                    <h3 id="live-categories">Sincronizando categorías...</h3>
+                    <div class="location-tag" id="live-location">📍 Cargando ubicación...</div>
+                    
+                    <div class="timer-box" id="live-time">
+                        ⏱️ -- : -- <span>ACTUALIZANDO</span>
+                    </div>
+                </div>
+                <div>
+                    <div class="live-logo-text">GRAND<br>RACE</div>
+                </div>
+            </div>
+
+            <!-- Botones de Utilidades -->
+            <div class="btn-full" style="margin-bottom: 15px; cursor: pointer;">
+                🔔 Set Notifications
+            </div>
+            
+            <div class="action-buttons-grid">
+                <div class="btn-action-box">🎲 Custom Randomizer</div>
+                <div class="btn-action-box">🚗 Random Cars</div>
+            </div>
+
+<!-- IFRAME DE LA ROTACIÓN OFICIAL EN VIVO -->
+<div style="margin: 40px 0 30px 0;">
+    <h3 class="up-next-title" style="margin-bottom: 15px;">Rotación Oficial en Directo</h3>
+    <div style="background: #1a1a1a; border: 1px solid rgba(255, 230, 0, 0.4); border-radius: 14px; overflow: hidden; padding: 10px; box-shadow: 0 8px 30px rgba(0,0,0,0.8);">
+        <div style="position: relative; width: 100%; height: 500px;">
+            <iframe id="rotation-iframe" src="https://motorfe.st/grand-races/" style="width: 100%; height: 100%; border: none; border-radius: 8px;" title="Grand Race Rotations"></iframe>
+        </div>
+    </div>
+</div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Clan BSKR - The Crew Motorfest. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Script limpio para definir la carrera en vivo de forma directa -->
+    <script>
+        // AQUÍ SOLO CAMBIAS EL TEXTO DE LA UBICACIÓN Y LAS CATEGORÍAS CUANDO GUSTES:
+        const grandRaceEnVivo = {
+            ubicacion: "📍 Kahakuloa",
+            categorias: "STREET TIER 1 <span>&raquo;</span> RALLY <span>&raquo;</span> STREET TIER 2",
+            hora: "14:50"
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('live-categories').innerHTML = grandRaceEnVivo.categorias;
+            document.getElementById('live-location').innerText = grandRaceEnVivo.ubicacion;
+            document.getElementById('live-time').innerHTML = `⏱️ ${grandRaceEnVivo.hora} <span>EN CURSO</span>`;
+        });
+    </script>
+</body>
+</html>

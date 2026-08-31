@@ -1,3 +1,8 @@
+// ==========================================
+// LÓGICA DE EXPEDIENTE Y CONSULTA PÚBLICA DE RÉCORDS
+// Archivo: js/records.js
+// ==========================================
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
@@ -56,7 +61,8 @@ async function cargarExpedientes() {
                 car: data.car || data.vehiculo || "No especificado",
                 carCategory: data.carCategory || data.categoriaVehiculo || "", // Categoría seleccionada del auto
                 time: data.timeScore || data.time || "N/A",
-                videoUrl: data.videoUrl || ""
+                videoUrl: data.videoUrl || "",
+                createdAt: data.createdAt || null // Guardamos el campo de fecha para el mapeo
             });
         });
 
@@ -108,6 +114,13 @@ function mostrarDetallePiloto(nombre, records) {
 
         const badgeHtml = `<span style="display: inline-block; background: ${badgeColor}22; color: ${badgeColor}; border: 1px solid ${badgeColor}; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; margin-left: 8px;">${rec.category}</span>`;
 
+        // Formatear la fecha de publicación
+        let fechaFormateada = "Desconocida";
+        if (rec.createdAt && typeof rec.createdAt.toDate === 'function') {
+            const dateObj = rec.createdAt.toDate();
+            fechaFormateada = dateObj.toLocaleDateString() + ' ' + dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
         tr.innerHTML = `
             <td>
                 <div style="font-weight: 600;">${rec.track}</div>
@@ -118,6 +131,7 @@ function mostrarDetallePiloto(nombre, records) {
                 ${rec.carCategory ? `<div style="font-size: 12px; color: #ffe600; margin-top: 3px; font-weight: 600;">Clase: ${rec.carCategory}</div>` : ''}
             </td>
             <td style="color: #ffe600; font-weight: bold; font-family: 'Orbitron', sans-serif;">${rec.time}</td>
+            <td style="font-size: 12px; color: #9ca3af;">${fechaFormateada}</td>
             <td>${rec.videoUrl ? `<a href="${rec.videoUrl}" target="_blank" class="link-video">Ver Prueba</a>` : 'Sin video'}</td>
         `;
         pilotRecordsTbody.appendChild(tr);

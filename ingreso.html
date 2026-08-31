@@ -22,11 +22,11 @@
         </nav>
     </header>
 
-    <!-- Contenedor Principal -->
-    <main class="container-form">
+    <!-- Contenedor Principal Centrado y Amplio -->
+    <main style="display: flex; justify-content: center; align-items: flex-start; padding: 40px 20px; min-height: 85vh;">
         
         <!-- SECCIÓN 1: LOGIN -->
-        <section id="auth-section" class="form-box">
+        <section id="auth-section" class="form-box" style="width: 100%; max-width: 500px;">
             <h2>Acceso Pilotos BSKR</h2>
             <p>Inicia sesión para registrar tus récords en The Crew Motorfest.</p>
             
@@ -43,70 +43,283 @@
             </form>
         </section>
 
-        <!-- SECCIÓN 2: PANEL DE SUBIDA DE RÉCORDS -->
-        <section id="dashboard-section" class="form-box hidden">
-            <h2>Bienvenido, <span id="user-tag-display">Piloto</span></h2>
-            <p>Sube tu evidencia al expediente oficial.</p>
+        <!-- SECCIÓN 2: PANEL DE USUARIO (DASHBOARD) -->
+        <section id="dashboard-section" class="hidden" style="width: 100%; max-width: 1200px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start;">
+            
+            <!-- COLUMNA IZQUIERDA: GESTIÓN DE RÉCORDS -->
+            <div class="form-box" style="width: 100%; max-width: none; margin: 0;">
+                <h2>Bienvenido, <span id="user-tag-display">Piloto</span></h2>
+                <p>Sube tu evidencia o gestiona tus récords publicados en el expediente oficial.</p>
 
-            <form id="record-form">
-    <div class="input-group">
-        <label>Categoría</label>
-        <select id="record-category" required>
-            <option value="Grand Race">Grand Race</option>
-            <option value="Summit">Summit</option>
-            <option value="Playlist">Playlist</option>
-            <option value="Trackforge">Trackforge</option>
-        </select>
-    </div>
+                <form id="record-form">
+                    <input type="hidden" id="record-id-hidden" value="">
 
-    <!-- Nombre de la Pista / Evento -->
-    <div class="input-group">
-        <label>Nombre de la Pista / Evento</label>
-        <input type="text" id="record-track" required placeholder="Ej: Tour Oahu">
-    </div>
+                    <div class="input-group">
+                        <label>Categoría</label>
+                        <select id="record-category" required>
+                            <option value="Grand Race">Grand Race</option>
+                            <option value="Summit">Summit</option>
+                            <option value="Playlist">Playlist</option>
+                            <option value="Trackforge">Trackforge</option>
+                        </select>
+                    </div>
 
-    <!-- Categoría del Vehículo (Selector) -->
-    <div class="input-group">
-        <label>Categoría de Vehículo</label>
-        <select id="car-category-select" required>
-            <option value="">Selecciona categoría de vehículo</option>
-            <option value="Street / Tier 1">Street / Tier 1</option>
-            <option value="Street / Tier 2">Street / Tier 2</option>
-            <option value="Alpha GP">Alpha GP</option>
-            <option value="Racing / Track">Racing / Track</option>
-            <option value="Hypercar">Hypercar</option>
-            <option value="Rally / Offroad">Rally / Offroad</option>
-            <option value="Rally Raid / Offroad">Rally Raid / Offroad</option>
-            <option value="Cup Car">Cup Car</option>
-            <option value="Motocross">Motocross</option>
-            <option value="Monster Truck">Monster Truck</option>
-            <option value="Avión">Avión</option>
-            <option value="Lancha">Lancha</option>
-            <option value="Drag">Drag</option>
-        </select>
-    </div>
+                    <div class="input-group">
+                        <label>Nombre de la Pista / Evento</label>
+                        <input type="text" id="record-track" required placeholder="Ej: Tour Oahu">
+                    </div>
 
-    <!-- Vehículo Utilizado (Texto Libre) -->
-    <div class="input-group">
-        <label>Modelo de Vehículo Utilizado</label>
-        <input type="text" id="car-input" placeholder="Ej: Nissan GT-R R35 Performance" required>
-    </div>
+                    <div class="input-group">
+                        <label>Categoría de Vehículo</label>
+                        <select id="car-category-select" required>
+                            <option value="">Selecciona categoría de vehículo</option>
+                            <option value="Street / Tier 1">Street / Tier 1</option>
+                            <option value="Street / Tier 2">Street / Tier 2</option>
+                            <option value="Alpha GP">Alpha GP</option>
+                            <option value="Racing / Track">Racing / Track</option>
+                            <option value="Hypercar">Hypercar</option>
+                            <option value="Rally / Offroad">Rally / Offroad</option>
+                            <option value="Rally Raid / Offroad">Rally Raid / Offroad</option>
+                            <option value="Cup Car">Cup Car</option>
+                            <option value="Motocross">Motocross</option>
+                            <option value="Monster Truck">Monster Truck</option>
+                            <option value="Avión">Avión</option>
+                            <option value="Lancha">Lancha</option>
+                            <option value="Drag">Drag</option>
+                        </select>
+                    </div>
 
-    <!-- Tiempo / Puntuación -->
-    <div class="input-group">
-        <label>Tiempo / Puntuación</label>
-        <input type="text" id="record-time" required placeholder="Ej: 02:14.560">
-    </div>
+                    <div class="input-group">
+                        <label>Modelo de Vehículo Utilizado</label>
+                        <input type="text" id="car-input" placeholder="Ej: Nissan GT-R R35 Performance" required>
+                    </div>
 
-    <div class="input-group">
-        <label>URL del Video de Evidencia</label>
-        <input type="url" id="record-video" required placeholder="https://youtube.com/watch?v=...">
-    </div>
+                    <div class="input-group">
+                        <label>Tiempo / Puntuación</label>
+                        <input type="text" id="record-time" required placeholder="Ej: 02:14.560">
+                    </div>
 
-    <button type="submit" class="btn-primary full-width">Publicar Récord</button>
-</form>
+                    <div class="input-group">
+                        <label>URL del Video de Evidencia</label>
+                        <input type="url" id="record-video" required placeholder="https://youtube.com/watch?v=...">
+                    </div>
 
-            <button id="btn-logout" class="btn-secondary full-width mt-10">Cerrar Sesión</button>
+                    <button type="submit" id="btn-submit-record" class="btn-primary full-width">Publicar Récord</button>
+                    <button type="button" id="btn-cancel-edit" class="btn-secondary full-width hidden" style="margin-top: 10px; background: #374151; border-color: #4b5563;">Cancelar Edición</button>
+                </form>
+
+                <!-- TABLA DE MIS RÉCORDS -->
+                <div style="margin-top: 40px; border-top: 1px solid #1f293d; padding-top: 20px;">
+                    <h3 style="font-family: 'Orbitron', sans-serif; color: #ffe600; font-size: 16px; margin-bottom: 15px; text-align: center;">Mis Récords Publicados</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="bskr-table" style="width: 100%; font-size: 13px; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid #374151;">
+                                    <th style="padding: 10px;">Pista / Evento</th>
+                                    <th style="padding: 10px;">Vehículo</th>
+                                    <th style="padding: 10px;">Tiempo</th>
+                                    <th style="padding: 10px;">Fecha</th>
+                                    <th style="padding: 10px; text-align: center;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="my-records-tbody">
+                                <!-- Se cargará dinámicamente con JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <button id="btn-logout" class="btn-secondary full-width" style="margin-top: 25px;">Cerrar Sesión</button>
+            </div>
+
+            <!-- COLUMNA DERECHA: PUBLICACIÓN Y GESTIÓN DE PRO SETTINGS -->
+            <div class="form-box" style="width: 100%; max-width: none; margin: 0;">
+                <h3 style="font-family: 'Orbitron', sans-serif; color: #ffe600; font-size: 18px; margin-bottom: 20px; text-align: center;">Publicar Pro Setting Mecánico</h3>
+                
+                <form id="prosetting-form">
+                    <input type="hidden" id="prosetting-id-hidden" value="">
+
+                    <div class="input-group">
+                        <label>Categoría de Vehículo</label>
+                        <select id="ps-category" required>
+                            <option value="Street Tier 1">Street Tier 1</option>
+                            <option value="Street Tier 2">Street Tier 2</option>
+                            <option value="Drift">Drift</option>
+                            <option value="Cup Car">Cup Car</option>
+                            <option value="Racing">Racing</option>
+                            <option value="Dragster">Dragster</option>
+                            <option value="Hypercar">Hypercar</option>
+                            <option value="Alpha GP">Alpha GP</option>
+                            <option value="Motocross">Motocross</option>
+                            <option value="Rally Raid">Rally Raid</option>
+                            <option value="Demolition">Demolition</option>
+                            <option value="Rally">Rally</option>
+                            <option value="Monster">Monster</option>
+                            <option value="Powerboat">Powerboat</option>
+                            <option value="Plane">Plane</option>
+                            <option value="Jet">Jet</option>
+                            <option value="Helicopter">Helicopter</option>
+                        </select>
+                    </div>
+
+                    <!-- NUEVO CAMPO: MARCA DE VEHÍCULO -->
+                    <div class="input-group">
+                        <label>Marca del Vehículo</label>
+                        <input type="text" id="ps-brand" required placeholder="Ej: Chevrolet, Porsche, Nissan">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Modelo del Vehículo (Ej: Chevrolet Camaro SS)</label>
+                        <input type="text" id="ps-carname" required placeholder="Nombre exacto del auto">
+                    </div>
+
+                    <!-- Specs Generales -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+                        <div class="input-group">
+                            <label>Potencia (HP)</label>
+                            <input type="text" id="ps-power" placeholder="Ej: 873 HP">
+                        </div>
+                        <div class="input-group">
+                            <label>Peso</label>
+                            <input type="text" id="ps-weight" placeholder="Ej: 873 kg">
+                        </div>
+                        <div class="input-group">
+                            <label>Velocidad Máx</label>
+                            <input type="text" id="ps-speed" placeholder="Ej: 399 km/h">
+                        </div>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px solid #374151; margin: 15px 0;">
+                    <p style="color: #ffe600; font-size: 13px; font-weight: bold; margin-bottom: 10px;">Transmission & Tires</p>
+                    
+                    <div class="input-group">
+                        <label>Final Drive</label>
+                        <input type="text" id="ps-finaldrive" placeholder="Ej: 0%">
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="input-group">
+                            <label>Grip Front (%)</label>
+                            <input type="text" id="ps-gripfront" placeholder="Ej: 0%">
+                        </div>
+                        <div class="input-group">
+                            <label>Grip Rear (%)</label>
+                            <input type="text" id="ps-griprear" placeholder="Ej: 0%">
+                        </div>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px solid #374151; margin: 15px 0;">
+                    <p style="color: #ffe600; font-size: 13px; font-weight: bold; margin-bottom: 10px;">Brakes & Aero</p>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="input-group">
+                            <label>Brake Balance</label>
+                            <input type="text" id="ps-brakebalance" placeholder="Ej: 60% Front">
+                        </div>
+                        <div class="input-group">
+                            <label>Brake Power</label>
+                            <input type="text" id="ps-brakepower" placeholder="Ej: 0%">
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="input-group">
+                            <label>Load Front (%)</label>
+                            <input type="text" id="ps-loadfront" placeholder="Ej: 0%">
+                        </div>
+                        <div class="input-group">
+                            <label>Load Rear (%)</label>
+                            <input type="text" id="ps-loadrear" placeholder="Ej: 0%">
+                        </div>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px solid #374151; margin: 15px 0;">
+                    <p style="color: #ffe600; font-size: 13px; font-weight: bold; margin-bottom: 10px;">Suspension</p>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="input-group">
+                            <label>Spring Front (%)</label>
+                            <input type="text" id="ps-springfront" placeholder="Ej: 10%">
+                        </div>
+                        <div class="input-group">
+                            <label>Spring Rear (%)</label>
+                            <input type="text" id="ps-springrear" placeholder="Ej: 10%">
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="input-group">
+                            <label>Compression Front (%)</label>
+                            <input type="text" id="ps-compfront" placeholder="Ej: -2%">
+                        </div>
+                        <div class="input-group">
+                            <label>Compression Rear (%)</label>
+                            <input type="text" id="ps-comprear" placeholder="Ej: 18%">
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="input-group">
+                            <label>Rebound Front (%)</label>
+                            <input type="text" id="ps-rebfront" placeholder="Ej: -2%">
+                        </div>
+                        <div class="input-group">
+                            <label>Rebound Rear (%)</label>
+                            <input type="text" id="ps-rebrear" placeholder="Ej: 18%">
+                        </div>
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px solid #374151; margin: 15px 0;">
+                    <p style="color: #ffe600; font-size: 13px; font-weight: bold; margin-bottom: 10px;">Antiroll Bars & Alignment</p>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="input-group">
+                            <label>ARB Front (%)</label>
+                            <input type="text" id="ps-arbfront" placeholder="Ej: 10%">
+                        </div>
+                        <div class="input-group">
+                            <label>ARB Rear (%)</label>
+                            <input type="text" id="ps-arbrear" placeholder="Ej: 10%">
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="input-group">
+                            <label>Camber Front</label>
+                            <input type="text" id="ps-camberfront" placeholder="Ej: -0.25%">
+                        </div>
+                        <div class="input-group">
+                            <label>Camber Rear</label>
+                            <input type="text" id="ps-camberrear" placeholder="Ej: 0%">
+                        </div>
+                    </div>
+
+                    <button type="submit" id="btn-submit-prosetting" class="btn-primary full-width" style="margin-top: 20px;">Guardar Pro Setting</button>
+                    <button type="button" id="btn-cancel-proedit" class="btn-secondary full-width hidden" style="margin-top: 10px; background: #374151; border-color: #4b5563;">Cancelar Edición</button>
+                </form>
+
+                <!-- TABLA DE MIS PRO SETTINGS PUBLICADOS -->
+                <div style="margin-top: 35px; border-top: 1px solid #1f293d; padding-top: 20px;">
+                    <h3 style="font-family: 'Orbitron', sans-serif; color: #ffe600; font-size: 16px; margin-bottom: 15px; text-align: center;">Mis Pro Settings Publicados</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="bskr-table" style="width: 100%; font-size: 13px; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="border-bottom: 1px solid #374151;">
+                                    <th style="padding: 10px;">Vehículo</th>
+                                    <th style="padding: 10px;">Specs</th>
+                                    <th style="padding: 10px;">Suspensión</th>
+                                    <th style="padding: 10px; text-align: center;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="my-prosettings-tbody">
+                                <!-- Se cargará dinámicamente con JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
         </section>
 
     </main>
@@ -115,9 +328,7 @@
         <p>&copy; 2026 Clan BSKR - The Crew Motorfest. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Scripts de Firebase -->
     <script type="module" src="js/auth.js"></script>
     <script type="module" src="js/records.js"></script>
 </body>
 </html>
-
