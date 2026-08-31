@@ -40,12 +40,12 @@
             <div class="live-card">
                 <div class="live-info">
                     <div style="font-size: 12px; color: #9ca3af; margin-bottom: 5px;">Grand Race &bull; Live Schedule</div>
-                    <!-- Elementos que se actualizarán automáticamente mediante script -->
-                    <h3 id="live-categories">STREET TIER 1 <span>&raquo;</span> RALLY <span>&raquo;</span> STREET TIER 2</h3>
-                    <div class="location-tag" id="live-location">📍 Kahakuloa</div>
+                    <!-- Elementos que se actualizarán automáticamente según la hora -->
+                    <h3 id="live-categories">Sincronizando categorías...</h3>
+                    <div class="location-tag" id="live-location">📍 Cargando ubicación...</div>
                     
                     <div class="timer-box" id="live-time">
-                        ⏱️ 14:50 <span>EN CURSO</span>
+                        ⏱️ -- : -- <span>ACTUALIZANDO</span>
                     </div>
                 </div>
                 <div>
@@ -63,15 +63,15 @@
                 <div class="btn-action-box">🚗 Random Cars</div>
             </div>
 
-<!-- IFRAME DE LA ROTACIÓN OFICIAL EN VIVO -->
-<div style="margin: 40px 0 30px 0;">
-    <h3 class="up-next-title" style="margin-bottom: 15px;">Rotación Oficial en Directo</h3>
-    <div style="background: #1a1a1a; border: 1px solid rgba(255, 230, 0, 0.4); border-radius: 14px; overflow: hidden; padding: 10px; box-shadow: 0 8px 30px rgba(0,0,0,0.8);">
-        <div style="position: relative; width: 100%; height: 500px;">
-            <iframe id="rotation-iframe" src="https://motorfe.st/grand-races/" style="width: 100%; height: 100%; border: none; border-radius: 8px;" title="Grand Race Rotations"></iframe>
-        </div>
-    </div>
-</div>
+            <!-- IFRAME DE LA ROTACIÓN OFICIAL EN VIVO -->
+            <div style="margin: 40px 0 30px 0;">
+                <h3 class="up-next-title" style="margin-bottom: 15px;">Rotación Oficial en Directo</h3>
+                <div style="background: #1a1a1a; border: 1px solid rgba(255, 230, 0, 0.4); border-radius: 14px; overflow: hidden; padding: 10px; box-shadow: 0 8px 30px rgba(0,0,0,0.8);">
+                    <div style="position: relative; width: 100%; height: 500px;">
+                        <iframe id="rotation-iframe" src="https://motorfe.st/grand-races/" style="width: 100%; height: 100%; border: none; border-radius: 8px;" title="Grand Race Rotations"></iframe>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </main>
@@ -80,77 +80,50 @@
         <p>&copy; 2026 Clan BSKR - The Crew Motorfest. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Script limpio para definir la carrera en vivo de forma directa -->
+    <!-- Script de Sincronización Automática por Bloques de Tiempo -->
     <script>
-        // AQUÍ SOLO CAMBIAS EL TEXTO DE LA UBICACIÓN Y LAS CATEGORÍAS CUANDO GUSTES:
-        const grandRaceEnVivo = {
-            ubicacion: "📍 Kahakuloa",
-            categorias: "STREET TIER 1 <span>&raquo;</span> RALLY <span>&raquo;</span> STREET TIER 2",
-            hora: "14:50"
-        };
+        // Tabla de rotaciones programadas basada en los horarios oficiales
+        const rotacionesGrandRace = [
+            { hora: "14:50", ubicacion: "Kahakuloa", categorias: "STREET TIER 1 <span>&raquo;</span> RALLY <span>&raquo;</span> STREET TIER 2" },
+            { hora: "15:00", ubicacion: "Kalaeloa", categorias: "ALPHA GP <span>&raquo;</span> HYPER <span>&raquo;</span> STREET TIER 1" },
+            { hora: "15:30", ubicacion: "Mauna Pele", categorias: "RACING <span>&raquo;</span> ALPHA GP <span>&raquo;</span> STREET TIER 2" },
+            { hora: "15:50", ubicacion: "Wahiawa Fields", categorias: "ALPHA GP <span>&raquo;</span> RACING <span>&raquo;</span> RALLY" },
+            { hora: "16:10", ubicacion: "Diamond Head", categorias: "ALPHA GP <span>&raquo;</span> RALLY <span>&raquo;</span> RACING" },
+            { hora: "16:30", ubicacion: "Kaena Point", categorias: "STREET TIER 1 <span>&raquo;</span> MOTOCROSS <span>&raquo;</span> RALLY RAID" },
+            { hora: "16:50", ubicacion: "Diamond Head", categorias: "RACING <span>&raquo;</span> HYPER <span>&raquo;</span> STREET TIER 2" },
+            { hora: "17:10", ubicacion: "Kaena Point", categorias: "ALPHA GP <span>&raquo;</span> STREET TIER 2 <span>&raquo;</span> HYPER" },
+            { hora: "17:30", ubicacion: "Kaneohe", categorias: "RALLY RAID <span>&raquo;</span> STREET TIER 1 <span>&raquo;</span> RACING" }
+        ];
 
-        window.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('live-categories').innerHTML = grandRaceEnVivo.categorias;
-            document.getElementById('live-location').innerText = grandRaceEnVivo.ubicacion;
-            document.getElementById('live-time').innerHTML = `⏱️ ${grandRaceEnVivo.hora} <span>EN CURSO</span>`;
-        });
+        function actualizarCarreraEnVivo() {
+            const ahora = new Date();
+            const minutosActualesTotales = ahora.getHours() * 60 + ahora.getMinutes();
 
-        function sincronizarGrandRaceEnVivo() {
-            const iframe = document.getElementById('rotation-iframe');
-            
-            try {
-                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                const rows = iframeDoc.querySelectorAll('table tr'); // Busca las filas de la tabla en el iframe
+            let carreraActiva = rotacionesGrandRace[0]; // Por defecto la primera
 
-                if (rows && rows.length > 1) {
-                    const ahora = new Date();
-                    const horaActual = ahora.getHours();
-                    const minutoActual = ahora.getMinutes();
-                    // Convertimos la hora actual a minutos totales del día para comparar fácilmente
-                    const minutosTotalesActuales = horaActual * 60 + minutoActual;
+            // Buscamos qué carrera corresponde según la hora actual (cada bloque dura 10 minutos)
+            for (let i = 0; i < rotacionesGrandRace.length; i++) {
+                const [h, m] = rotacionesGrandRace[i].hora.split(':').map(Number);
+                const minutosInicio = h * 60 + m;
+                const minutosFin = minutosInicio + 10; // Duración de 10 min
 
-                    let filaSeleccionada = null;
-
-                    // Recorremos las filas de la tabla (saltando la cabecera si es index 0)
-                    for (let i = 1; i < rows.length; i++) {
-                        const celdas = rows[i].querySelectorAll('td');
-                        if (celdas.length >= 2) {
-                            const textoTiempo = celdas[0].innerText; // Ej: "31/8, 14:50" o "14:50"
-                            
-                            // Extraemos las horas y minutos de la celda de la tabla
-                            const matchHora = textoTiempo.match(/(\d{1,2}):(\d{2})/);
-                            if (matchHora) {
-                                const hFila = parseInt(matchHora[1]);
-                                const mFila = parseInt(matchHora[2]);
-                                const minutosTotalesFila = hFila * 60 + mFila;
-
-                                // Si la hora actual es mayor o igual a la de la fila, es una candidata en curso o pasada reciente
-                                // Como cada Grand Race dura 10 minutos, buscamos la que esté en el rango de esos 10 minutos
-                                if (minutosTotalesActuales >= minutosTotalesFila && minutosTotalesActuales < (minutosTotalesFila + 10)) {
-                                    filaSeleccionada = celdas;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    // Si encontró una fila que coincide con la hora actual, actualiza la tarjeta
-                    if (filaSeleccionada) {
-                        const ubicacion = filaSeleccionada[1] ? filaSeleccionada[1].innerText : "Ubicación en curso";
-                        const categorias = filaSeleccionada[2] ? filaSeleccionada[2].innerText : "Categorías en curso";
-                        
-                        document.getElementById('live-location').innerText = `📍 ${ubicacion}`;
-                        document.getElementById('live-categories').innerText = categorias.replace(/>/g, '»');
-                        
-                        // Calculamos cuántos minutos van transcurriendo de esos 10
-                        // (Opcional para mostrar un estimado del tiempo restante)
-                        document.getElementById('live-time').innerHTML = `⏱️ En curso <span>ACTIVO</span>`;
-                    }
+                if (minutosActualesTotales >= minutosInicio && minutosActualesTotales < minutosFin) {
+                    carreraActiva = rotacionesGrandRace[i];
+                    break;
                 }
-            } catch (e) {
-                console.log("Modo de protección CORS activo. Usando temporizador de respaldo.");
             }
+
+            // Pintamos los datos en la tarjeta superior de forma dinámica
+            document.getElementById('live-categories').innerHTML = carreraActiva.categorias;
+            document.getElementById('live-location').innerText = `📍 ${carreraActiva.ubicacion}`;
+            document.getElementById('live-time').innerHTML = `⏱️ ${carreraActiva.hora} <span>EN CURSO</span>`;
         }
+
+        // Ejecutar al cargar la página y revisar cambios cada 30 segundos
+        window.addEventListener('DOMContentLoaded', () => {
+            actualizarCarreraEnVivo();
+            setInterval(actualizarCarreraEnVivo, 30000); 
+        });
     </script>
 </body>
 </html>
