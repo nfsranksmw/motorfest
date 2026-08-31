@@ -80,9 +80,8 @@
         <p>&copy; 2026 Clan BSKR - The Crew Motorfest. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Script de Sincronización Automática por Bloques de Tiempo -->
+    <!-- Script de Sincronización Automática con Cuenta Regresiva -->
     <script>
-        // Tabla de rotaciones programadas ampliada con los horarios reales de la temporada
         const rotacionesGrandRace = [
             { hora: "14:50", ubicacion: "Kahakuloa", categorias: "STREET TIER 1 <span>&raquo;</span> RALLY <span>&raquo;</span> STREET TIER 2" },
             { hora: "15:10", ubicacion: "Kalaeloa", categorias: "ALPHA GP <span>&raquo;</span> HYPER <span>&raquo;</span> STREET TIER 1" },
@@ -111,31 +110,49 @@
         function actualizarCarreraEnVivo() {
             const ahora = new Date();
             const minutosActualesTotales = ahora.getHours() * 60 + ahora.getMinutes();
+            const segundosActuales = ahora.getSeconds();
 
-            let carreraActiva = rotacionesGrandRace[0]; // Por defecto la primera
+            let carreraActiva = rotacionesGrandRace[0];
+            let minutosFinTotales = 0;
 
-            // Buscamos qué carrera corresponde según la hora actual (cada bloque dura 10 minutos)
             for (let i = 0; i < rotacionesGrandRace.length; i++) {
                 const [h, m] = rotacionesGrandRace[i].hora.split(':').map(Number);
                 const minutosInicio = h * 60 + m;
-                const minutosFin = minutosInicio + 10; // Duración de 10 min
+                const minutosFin = minutosInicio + 10; // Cada Grand Race dura 10 minutos
 
                 if (minutosActualesTotales >= minutosInicio && minutosActualesTotales < minutosFin) {
                     carreraActiva = rotacionesGrandRace[i];
+                    minutosFinTotales = minutosFin;
                     break;
                 }
             }
 
-            // Pintamos los datos en la tarjeta superior de forma dinámica
+            // Pintamos los datos fijos de la carrera
             document.getElementById('live-categories').innerHTML = carreraActiva.categorias;
             document.getElementById('live-location').innerText = `📍 ${carreraActiva.ubicacion}`;
-            document.getElementById('live-time').innerHTML = `⏱️ ${carreraActiva.hora} <span>EN CURSO</span>`;
+
+            // Calculamos el tiempo restante exacto segundo a segundo
+            if (minutosFinTotales > 0) {
+                const totalSegundosRestantes = (minutosFinTotales * 60) - (minutosActualesTotales * 60 + segundosActuales);
+                
+                if (totalSegundosRestantes > 0) {
+                    const minsRestantes = Math.floor(totalSegundosRestantes / 60);
+                    const segsRestantes = totalSegundosRestantes % 60;
+                    const formatoSegs = segsRestantes < 10 ? '0' + segsRestantes : segsRestantes;
+
+                    document.getElementById('live-time').innerHTML = `⏱️ ${minsRestantes}:${formatoSegs} <span>RESTANTES</span>`;
+                } else {
+                    document.getElementById('live-time').innerHTML = `⏱️ 00:00 <span>CAMBIANDO...</span>`;
+                }
+            } else {
+                document.getElementById('live-time').innerHTML = `⏱️ ${carreraActiva.hora} <span>EN CURSO</span>`;
+            }
         }
 
-        // Ejecutar al cargar la página y revisar cambios cada 30 segundos
+        // Ejecutar al cargar y actualizar cada segundo para que el reloj corra fluido
         window.addEventListener('DOMContentLoaded', () => {
             actualizarCarreraEnVivo();
-            setInterval(actualizarCarreraEnVivo, 30000); 
+            setInterval(actualizarCarreraEnVivo, 1000); 
         });
     </script>
 </body>
