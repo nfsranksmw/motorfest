@@ -94,6 +94,63 @@
             document.getElementById('live-location').innerText = grandRaceEnVivo.ubicacion;
             document.getElementById('live-time').innerHTML = `⏱️ ${grandRaceEnVivo.hora} <span>EN CURSO</span>`;
         });
+
+        function sincronizarGrandRaceEnVivo() {
+            const iframe = document.getElementById('rotation-iframe');
+            
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const rows = iframeDoc.querySelectorAll('table tr'); // Busca las filas de la tabla en el iframe
+
+                if (rows && rows.length > 1) {
+                    const ahora = new Date();
+                    const horaActual = ahora.getHours();
+                    const minutoActual = ahora.getMinutes();
+                    // Convertimos la hora actual a minutos totales del día para comparar fácilmente
+                    const minutosTotalesActuales = horaActual * 60 + minutoActual;
+
+                    let filaSeleccionada = null;
+
+                    // Recorremos las filas de la tabla (saltando la cabecera si es index 0)
+                    for (let i = 1; i < rows.length; i++) {
+                        const celdas = rows[i].querySelectorAll('td');
+                        if (celdas.length >= 2) {
+                            const textoTiempo = celdas[0].innerText; // Ej: "31/8, 14:50" o "14:50"
+                            
+                            // Extraemos las horas y minutos de la celda de la tabla
+                            const matchHora = textoTiempo.match(/(\d{1,2}):(\d{2})/);
+                            if (matchHora) {
+                                const hFila = parseInt(matchHora[1]);
+                                const mFila = parseInt(matchHora[2]);
+                                const minutosTotalesFila = hFila * 60 + mFila;
+
+                                // Si la hora actual es mayor o igual a la de la fila, es una candidata en curso o pasada reciente
+                                // Como cada Grand Race dura 10 minutos, buscamos la que esté en el rango de esos 10 minutos
+                                if (minutosTotalesActuales >= minutosTotalesFila && minutosTotalesActuales < (minutosTotalesFila + 10)) {
+                                    filaSeleccionada = celdas;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    // Si encontró una fila que coincide con la hora actual, actualiza la tarjeta
+                    if (filaSeleccionada) {
+                        const ubicacion = filaSeleccionada[1] ? filaSeleccionada[1].innerText : "Ubicación en curso";
+                        const categorias = filaSeleccionada[2] ? filaSeleccionada[2].innerText : "Categorías en curso";
+                        
+                        document.getElementById('live-location').innerText = `📍 ${ubicacion}`;
+                        document.getElementById('live-categories').innerText = categorias.replace(/>/g, '»');
+                        
+                        // Calculamos cuántos minutos van transcurriendo de esos 10
+                        // (Opcional para mostrar un estimado del tiempo restante)
+                        document.getElementById('live-time').innerHTML = `⏱️ En curso <span>ACTIVO</span>`;
+                    }
+                }
+            } catch (e) {
+                console.log("Modo de protección CORS activo. Usando temporizador de respaldo.");
+            }
+        }
     </script>
 </body>
 </html>
