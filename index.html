@@ -6,7 +6,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio | BSKR Motorfest</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: -50px auto 40px auto;
+            position: relative;
+            z-index: 10;
+            padding: 0 20px;
+        }
+        .stat-card {
+            background: rgba(18, 18, 18, 0.9);
+            border: 1px solid rgba(250, 204, 21, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+        }
+        .stat-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            color: #facc15;
+            margin-bottom: 5px;
+        }
+        .stat-card p {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .home-section-container {
+            max-width: 1100px;
+            margin: 0 auto 60px auto;
+            padding: 0 20px;
+        }
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #ffffff;
+            border-left: 4px solid #facc15;
+            padding-left: 12px;
+            text-transform: uppercase;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        .content-card {
+            background: #161616;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 25px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .content-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(250, 204, 21, 0.5);
+        }
+        .badge-tag {
+            background: rgba(250, 204, 21, 0.15);
+            color: #facc15;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+    </style>
 </head>
 <body class="bg-motorfest text-white">
 
@@ -15,16 +89,15 @@
         <div class="logo">B<span>SKR</span></div>
         <nav>
             <a href="index.html" class="active">Inicio</a>
-            <a href="expediente.html">Records</a>
+            <a href="expediente.html">Récords</a>
             <a href="miembros.html">Miembros</a>
-            <a href="tuneo.html">Prosetting</a>
-            <a href="grand-race.html" class="btn-login">Grand Race</a>
-    <a 
-href="ingreso.html" class="btn-login">Acceso/Perfil</a>
+            <a href="tuneo.html">ProSetting</a>
+            <a href="grand-race.html">Grand Race</a>
+            <a href="ingreso.html" class="btn-login">Acceso/Perfil</a>
         </nav>
     </header>
 
-    <!-- Sección Hero (Aquí es donde aparecerá exclusivamente la imagen de fondo) -->
+    <!-- Sección Hero -->
     <section class="hero">
         <div class="hero-content">
             <h1>BSKR MOTORFEST</h1>
@@ -32,6 +105,67 @@ href="ingreso.html" class="btn-login">Acceso/Perfil</a>
             <a href="ingreso.html" class="btn-primary">Registrar mi Récord</a>
         </div>
     </section>
+
+    <!-- Barra de Estadísticas en Vivo del Clan -->
+    <div class="stats-bar">
+        <div class="stat-card">
+            <h3>48</h3>
+            <p>Pilotos Activos</p>
+        </div>
+        <div class="stat-card">
+            <h3>1,420</h3>
+            <p>Grand Races Dominadas</p>
+        </div>
+        <div class="stat-card">
+            <h3>315</h3>
+            <p>Récords Registrados</p>
+        </div>
+    </div>
+
+    <!-- Próximo Evento / Custom Summit -->
+    <div class="home-section-container">
+        <h2 class="section-title">Custom Summit Actual</h2>
+        <div style="background: linear-gradient(135deg, #1a1a1a 0%, #111111 100%); border: 1px solid rgba(250, 204, 21, 0.4); border-radius: 14px; padding: 30px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
+            <div>
+                <span class="badge-tag">Evento Semanal</span>
+                <h3 style="font-family: 'Orbitron', sans-serif; font-size: 1.8rem; margin-bottom: 8px;">Oahu Speed Tour</h3>
+                <p style="color: #9ca3af; margin-bottom: 15px;">Demuestra tu control absoluto en Hypercar y Alpha GP bajo las condiciones más exigentes.</p>
+                <div style="font-weight: 600; color: #facc15;">⏱️ Cierra en: 3 días 14 horas</div>
+            </div>
+            <div>
+                <a href="grand-race.html" style="background: #facc15; color: #111; padding: 12px 25px; border-radius: 8px; font-weight: 900; text-decoration: none; text-transform: uppercase; display: inline-block;">Ver Rotación Live</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cuadrícula con ProSettings Destacados, Récords y Comunidad -->
+    <div class="home-section-container">
+        <div class="grid-3">
+            <!-- ProSetting Destacado (Enlazado correctamente a tuneo.html) -->
+            <div class="content-card">
+                <span class="badge-tag">ProSetting Top</span>
+                <h3 style="font-family: 'Orbitron', sans-serif; font-size: 1.2rem; margin-bottom: 10px;">Porsche 911 GT3 RS</h3>
+                <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 15px;">Configuración optimizada para curvas cerradas en Street Tier 2 con máxima estabilidad.</p>
+                <a href="tuneo.html" style="color: #facc15; font-weight: bold; text-decoration: none; font-size: 0.9rem;">Ver ajuste &raquo;</a>
+            </div>
+
+            <!-- Último Récord del Clan (Enlazado correctamente a expediente.html) -->
+            <div class="content-card">
+                <span class="badge-tag" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">Nuevo Récord</span>
+                <h3 style="font-family: 'Orbitron', sans-serif; font-size: 1.2rem; margin-bottom: 10px;">Kahakuloa Sprint</h3>
+                <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 15px;"><b>BSKR_Viper</b> pulverizó el crono con un tiempo de <i>01:42.89</i> en categoría Hypercar.</p>
+                <a href="expediente.html" style="color: #60a5fa; font-weight: bold; text-decoration: none; font-size: 0.9rem;">Ver récords &raquo;</a>
+            </div>
+
+            <!-- Comunidad y Discord (Enlazado a miembros.html) -->
+            <div class="content-card">
+                <span class="badge-tag" style="background: rgba(168, 85, 247, 0.15); color: #c084fc;">Comunidad</span>
+                <h3 style="font-family: 'Orbitron', sans-serif; font-size: 1.2rem; margin-bottom: 10px;">Únete al Escuadrón</h3>
+                <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 15px;">Conecta con otros pilotos de BSKR, organiza convoyes y comparte clips en nuestro servidor oficial.</p>
+                <a href="miembros.html" style="color: #c084fc; font-weight: bold; text-decoration: none; font-size: 0.9rem;">Conocer miembros &raquo;</a>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
