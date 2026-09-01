@@ -80,6 +80,40 @@
             display: inline-block;
             margin-bottom: 12px;
         }
+
+        /* Estilos de color en texto exclusivamente para ProSetting, Meta Cars y Grand Race */
+        .navbar nav a.nav-highlight-prosetting {
+            color: #facc15;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(250, 204, 21, 0.3);
+            transition: all 0.3s ease;
+        }
+        .navbar nav a.nav-highlight-prosetting:hover {
+            color: #fde047;
+            text-shadow: 0 0 16px rgba(250, 204, 21, 0.6);
+        }
+
+        .navbar nav a.nav-highlight-metacars {
+            color: #10b981;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease;
+        }
+        .navbar nav a.nav-highlight-metacars:hover {
+            color: #34d399;
+            text-shadow: 0 0 16px rgba(16, 185, 129, 0.6);
+        }
+
+        .navbar nav a.nav-highlight-grandrace {
+            color: #3b82f6;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+        .navbar nav a.nav-highlight-grandrace:hover {
+            color: #60a5fa;
+            text-shadow: 0 0 16px rgba(59, 130, 246, 0.6);
+        }
     </style>
 </head>
 <body class="bg-motorfest text-white">
@@ -88,11 +122,13 @@
     <header class="navbar">
         <div class="logo">B<span>SKR</span></div>
         <nav>
-            <a href="index.html" class="active">Inicio</a>
+            <a href="index.html">Inicio</a>
             <a href="expediente.html">Récords</a>
+            <a href="tuneo.html" class="nav-highlight-prosetting">ProSetting</a>
+            <a href="metacars.html" class="nav-highlight-metacars">Meta Cars</a>
+            <a href="grand-race.html" class="nav-highlight-grandrace">Grand Race</a>
+            <a href="playlists.html" style="color: hsl(0, 0%, 77%); font-weight: 600; text-shadow: 0 0 10px rgba(236, 72, 153, 0.3);">Playlists</a>
             <a href="miembros.html">Miembros</a>
-            <a href="tuneo.html">ProSetting</a>
-            <a href="grand-race.html">Grand Race</a>
             <a href="ingreso.html" class="btn-login">Acceso/Perfil</a>
         </nav>
     </header>
@@ -141,7 +177,7 @@
     <!-- Cuadrícula con ProSettings Destacados, Récords y Comunidad -->
     <div class="home-section-container">
         <div class="grid-3">
-            <!-- ProSetting Destacado (Enlazado correctamente a tuneo.html) -->
+            <!-- ProSetting Destacado -->
             <div class="content-card">
                 <span class="badge-tag">ProSetting Top</span>
                 <h3 style="font-family: 'Orbitron', sans-serif; font-size: 1.2rem; margin-bottom: 10px;">Porsche 911 GT3 RS</h3>
@@ -149,7 +185,7 @@
                 <a href="tuneo.html" style="color: #facc15; font-weight: bold; text-decoration: none; font-size: 0.9rem;">Ver ajuste &raquo;</a>
             </div>
 
-            <!-- Último Récord del Clan (Enlazado correctamente a expediente.html) -->
+            <!-- Último Récord del Clan -->
             <div class="content-card">
                 <span class="badge-tag" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">Nuevo Récord</span>
                 <h3 style="font-family: 'Orbitron', sans-serif; font-size: 1.2rem; margin-bottom: 10px;">Kahakuloa Sprint</h3>
@@ -157,7 +193,7 @@
                 <a href="expediente.html" style="color: #60a5fa; font-weight: bold; text-decoration: none; font-size: 0.9rem;">Ver récords &raquo;</a>
             </div>
 
-            <!-- Comunidad y Discord (Enlazado a miembros.html) -->
+            <!-- Comunidad y Discord -->
             <div class="content-card">
                 <span class="badge-tag" style="background: rgba(168, 85, 247, 0.15); color: #c084fc;">Comunidad</span>
                 <h3 style="font-family: 'Orbitron', sans-serif; font-size: 1.2rem; margin-bottom: 10px;">Únete al Escuadrón</h3>

@@ -30,6 +30,11 @@ const selectedCategoryTitle = document.getElementById('selected-category-title')
 const setupsContainer = document.getElementById('setups-container');
 const btnBackCategories = document.getElementById('btn-back-categories');
 
+// Elementos de las estadísticas
+const statCategoriesCount = document.getElementById('stat-categories-count');
+const statSettingsCount = document.getElementById('stat-settings-count');
+const statUsersCount = document.getElementById('stat-users-count');
+
 let allSetups = [];
 
 async function cargarProSettings() {
@@ -43,11 +48,40 @@ async function cargarProSettings() {
             allSetups.push({ id: doc.id, ...doc.data() });
         });
 
+        // Actualizar estadísticas dinámicamente con los datos de Firebase
+        actualizarEstadisticas();
+
         renderizarCategorias();
 
     } catch (error) {
         console.error("Error al cargar pro settings:", error);
+        actualizarEstadisticas();
         renderizarCategorias();
+    }
+}
+
+function actualizarEstadisticas() {
+    // 1. Total de categorías oficiales fijas
+    if (statCategoriesCount) {
+        statCategoriesCount.textContent = categoriasOficiales.length;
+    }
+
+    // 2. Total de configuraciones Pro obtenidas de Firestore
+    if (statSettingsCount) {
+        statSettingsCount.textContent = allSetups.length;
+    }
+
+    // 3. Total de contribuyentes únicos basados en el campo 'tuner' o 'user'
+    if (statUsersCount) {
+        const tunersUnicos = new Set();
+        allSetups.forEach(setup => {
+            const tunerName = (setup.tuner || setup.user || setup.autor || "").trim();
+            if (tunerName) {
+                tunersUnicos.add(tunerName.toLowerCase());
+            }
+        });
+        // Si hay registros muestra los únicos, de lo contrario un estimado o 0
+        statUsersCount.textContent = tunersUnicos.size > 0 ? tunersUnicos.size : allSetups.length;
     }
 }
 
@@ -124,7 +158,7 @@ function mostrarSetupsDeCategoria(categoryName) {
 
     filtrados.forEach(setup => {
         const card = document.createElement('div');
-        card.className = "prosetup-card";
+        card.className = "setup-card";
         
         const marcaExtraida = setup.brand || setup.carBrand || setup.marca || setup.vehicleBrand || (setup.carName ? setup.carName.split(' ')[0] : 'Marca Desconocida');
 
@@ -274,8 +308,6 @@ function mostrarSetupsDeCategoria(categoryName) {
             </div>
         `;
         
-        // Añadimos la clase base para que aplique los estilos CSS correctos
-        card.className = "setup-card";
         setupsContainer.appendChild(card);
     });
 }

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; style-src * 'unsafe-inline';">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlists & Eventos | BSKR Motorfest</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        .playlists-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .playlists-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .playlists-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .playlists-header p {
+            color: #9ca3af;
+            font-size: 1.1rem;
+        }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+        .breadcrumb button {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #facc15;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .breadcrumb button:hover {
+            background: rgba(250, 204, 21, 0.2);
+            border-color: #facc15;
+        }
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        .card-item {
+            background: #161616;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+        }
+        .card-item:hover {
+            transform: translateY(-6px);
+            border-color: rgba(250, 204, 21, 0.5);
+            box-shadow: 0 15px 35px rgba(250, 204, 21, 0.15);
+        }
+        .card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .card-body {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        .card-desc {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        .card-action {
+            font-size: 0.85rem;
+            color: #3b82f6;
+            font-weight: bold;
+            text-align: right;
+        }
+        /* Tabla de Ranking del Team */
+        .ranking-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #161616;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .ranking-table th, .ranking-table td {
+            padding: 14px 20px;
+            text-align: left;
+        }
+        .ranking-table th {
+            background: rgba(250, 204, 21, 0.1);
+            color: #facc15;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        .ranking-table tr:not(:last-child) td {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .ranking-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #9ca3af;
+            font-style: italic;
+            background: #161616;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-motorfest text-white">
+
+    <!-- Navegación -->
+    <header class="navbar">
+        <div class="logo">B<span>SKR</span></div>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="expediente.html">Récords</a>
+            <a href="tuneo.html" class="nav-highlight-prosetting">ProSetting</a>
+            <a href="metacars.html" class="nav-highlight-metacars">Meta Cars</a>
+            <a href="grand-race.html" class="nav-highlight-grandrace">Grand Race</a>
+            <a href="playlists.html" style="color: hsl(0, 0%, 75%); font-weight: 600; text-shadow: 0 0 10px rgba(236, 72, 153, 0.3);">Playlists</a>
+            <a href="miembros.html">Miembros</a>
+            <a href="ingreso.html" class="btn-login">Acceso/Perfil</a>
+        </nav>
+    </header>
+
+    <div class="playlists-container">
+        <div class="playlists-header">
+            <h1 id="mainTitle">Playlists del Clan</h1>
+            <p id="mainSubtitle">Selecciona una playlist para explorar sus eventos y récords oficiales.</p>
+        </div>
+
+        <!-- Migas de pan (Breadcrumbs dinámicos para regresar) -->
+        <div class="breadcrumb" id="breadcrumbContainer" style="display: none;">
+            <button onclick="renderPlaylistsView()">← Volver a Playlists</button>
+            <span id="breadcrumbPath"></span>
+        </div>
+
+        <!-- Contenedor donde se cargan las tarjetas de forma dinámica -->
+        <div class="grid-cards" id="dynamicGrid"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Clan BSKR - The Crew Motorfest. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Archivo JavaScript cargado correctamente como módulo -->
+    <script type="module" src="js/playlists.js"></script>
+</body>
+</html>

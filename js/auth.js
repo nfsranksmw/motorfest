@@ -106,12 +106,21 @@ async function cargarMisRecords(pilotName) {
             const tr = document.createElement('tr');
             tr.style.borderBottom = "1px solid #1f293d";
             tr.innerHTML = `
-                <td style="padding: 12px;"><strong>${data.track || ''}</strong><br><span style="font-size: 11px; color: #9ca3af;">${data.category || ''}</span></td>
+                <td style="padding: 12px;"><strong>${data.track || ''}</strong><br><span style="font-size: 11px; color: #9ca3af;">${data.category || ''} | Plaf: ${data.platform || 'N/A'}</span></td>
                 <td style="padding: 12px;">${data.car || ''}<br><span style="font-size: 11px; color: #ffe600;">${data.carCategory || ''}</span></td>
                 <td style="padding: 12px; color: #ffe600; font-family: 'Orbitron', sans-serif;">${data.timeScore || ''}</td>
                 <td style="padding: 12px; font-size: 12px; color: #9ca3af;">${fechaFormateada}</td>
                 <td style="padding: 12px; text-align: center;">
-                    <button type="button" class="btn-edit-item btn-secondary" data-id="${docId}" data-category="${data.category || ''}" data-track="${data.track || ''}" data-carcat="${data.carCategory || ''}" data-car="${data.car || ''}" data-time="${data.timeScore || ''}" data-video="${data.videoUrl || ''}" style="padding: 5px 10px; font-size: 11px; margin-right: 5px; cursor: pointer;">Editar</button>
+                    <button type="button" class="btn-edit-item btn-secondary" 
+                        data-id="${docId}" 
+                        data-category="${data.category || ''}" 
+                        data-track="${data.track || ''}" 
+                        data-platform="${data.platform || ''}" 
+                        data-carcat="${data.carCategory || ''}" 
+                        data-car="${data.car || ''}" 
+                        data-time="${data.timeScore || ''}" 
+                        data-video="${data.videoUrl || ''}" 
+                        style="padding: 5px 10px; font-size: 11px; margin-right: 5px; cursor: pointer;">Editar</button>
                     <button type="button" class="btn-delete-item btn-secondary" data-id="${docId}" style="padding: 5px 10px; font-size: 11px; background: #ef4444; border-color: #ef4444; color: white; cursor: pointer;">Eliminar</button>
                 </td>
             `;
@@ -125,6 +134,7 @@ async function cargarMisRecords(pilotName) {
                 recordIdHidden.value = ds.id;
                 document.getElementById('record-category').value = ds.category;
                 document.getElementById('record-track').value = ds.track;
+                document.getElementById('record-platform').value = ds.platform; // Cargar la plataforma al editar
                 document.getElementById('car-category-select').value = ds.carcat;
                 document.getElementById('car-input').value = ds.car;
                 document.getElementById('record-time').value = ds.time;
@@ -231,7 +241,6 @@ async function cargarMisProsettings(pilotName) {
                 document.getElementById('ps-weight').value = ds.weight;
                 document.getElementById('ps-speed').value = ds.speed;
                 
-                // Rellenar todos los nuevos campos al editar
                 document.getElementById('ps-finaldrive').value = ds.finaldrive || '';
                 document.getElementById('ps-gripfront').value = ds.gripfront || '';
                 document.getElementById('ps-griprear').value = ds.griprear || '';
@@ -345,10 +354,12 @@ if (recordForm) {
         const pilotName = currentUser.email.split('@')[0].toUpperCase();
         const recordId = recordIdHidden.value;
 
+        // Se incluye el campo platform aquí para enviarlo a Firestore
         const recordData = {
             pilot: pilotName,
             category: document.getElementById('record-category').value,
             track: document.getElementById('record-track').value,
+            platform: document.getElementById('record-platform').value, // <--- CAMBIO APLICADO
             carCategory: document.getElementById('car-category-select').value,
             car: document.getElementById('car-input').value,
             timeScore: document.getElementById('record-time').value,
@@ -395,7 +406,6 @@ if (prosettingForm) {
         const pilotName = currentUser.email.split('@')[0].toUpperCase();
         const prosettingId = prosettingIdHidden ? prosettingIdHidden.value : "";
 
-        // Capturar TODOS los campos nuevos del formulario Pro Setting
         const psData = {
             tuner: pilotName,
             category: document.getElementById('ps-category').value,

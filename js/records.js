@@ -26,6 +26,36 @@ const selectedPilotTitle = document.getElementById('selected-pilot-title');
 const pilotRecordsTbody = document.getElementById('pilot-records-tbody');
 const btnBackToPilots = document.getElementById('btn-back-to-pilots');
 
+// Función para renderizar la insignia estilizada de la plataforma con la "M" de Motorfest
+function renderPlatformBadge(platformName) {
+    if (!platformName) return `<span style="color: #6b7280; font-size: 0.8rem;">N/A</span>`;
+
+    const p = platformName.trim().toLowerCase();
+    let platformText = platformName.toUpperCase();
+    let textColor = "#ffffff"; // Blanco por defecto
+
+    if (p.includes("pc")) {
+        platformText = "PC";
+        textColor = "#ffffff";
+    } else if (p.includes("xbox") || p.includes("series") || p.includes("xsx")) {
+        platformText = "XBOX";
+        textColor = "#107c10"; // Verde Xbox
+    } else if (p.includes("playstation") || p.includes("ps5") || p.includes("ps4") || p.includes("play") || p.includes("ps")) {
+        platformText = "PLAYSTATION";
+        textColor = "#0070d1"; // Azul PlayStation
+    }
+
+    // La "M" inclinada en amarillo característica de Motorfest
+    const mLogo = `<span style="font-family: 'Orbitron', sans-serif; font-weight: bold; font-style: italic; color: #ffe600; font-size: 13px; margin-right: 3px;">M</span>`;
+
+    return `
+        <span style="display: inline-flex; align-items: center; background: rgba(255,255,255,0.07); padding: 3px 8px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+            ${mLogo}
+            <span style="color: ${textColor}; font-weight: bold; font-size: 11px; letter-spacing: 0.5px; font-family: 'Orbitron', sans-serif;">${platformText}</span>
+        </span>
+    `;
+}
+
 async function cargarExpedientes() {
     if (!pilotsGrid) return;
 
@@ -57,12 +87,13 @@ async function cargarExpedientes() {
             
             pilotosMap[piloto].push({
                 track: data.track || data.event || "Evento General",
-                category: data.category || "General", // Grand Race, Trackforge, Playlist, etc.
+                category: data.category || "General", 
                 car: data.car || data.vehiculo || "No especificado",
-                carCategory: data.carCategory || data.categoriaVehiculo || "", // Categoría seleccionada del auto
+                carCategory: data.carCategory || data.categoriaVehiculo || "", 
+                platform: data.platform || data.plataforma || "No especificada",
                 time: data.timeScore || data.time || "N/A",
                 videoUrl: data.videoUrl || "",
-                createdAt: data.createdAt || null // Guardamos el campo de fecha para el mapeo
+                createdAt: data.createdAt || null 
             });
         });
 
@@ -105,16 +136,14 @@ function mostrarDetallePiloto(nombre, records) {
     records.forEach(rec => {
         const tr = document.createElement('tr');
         
-        // Estilo profesional tipo insignia para la categoría de la ruta
-        let badgeColor = "#3b82f6"; // Azul por defecto
+        let badgeColor = "#3b82f6"; 
         const catLower = rec.category.toLowerCase();
-        if (catLower.includes('grand race')) badgeColor = "#eab308"; // Amarillo
-        else if (catLower.includes('track')) badgeColor = "#ef4444"; // Rojo
-        else if (catLower.includes('playlist')) badgeColor = "#8b5cf6"; // Morado
+        if (catLower.includes('grand race')) badgeColor = "#eab308"; 
+        else if (catLower.includes('track')) badgeColor = "#ef4444"; 
+        else if (catLower.includes('playlist')) badgeColor = "#8b5cf6"; 
 
         const badgeHtml = `<span style="display: inline-block; background: ${badgeColor}22; color: ${badgeColor}; border: 1px solid ${badgeColor}; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; margin-left: 8px;">${rec.category}</span>`;
 
-        // Formatear la fecha de publicación
         let fechaFormateada = "Desconocida";
         if (rec.createdAt && typeof rec.createdAt.toDate === 'function') {
             const dateObj = rec.createdAt.toDate();
@@ -130,6 +159,7 @@ function mostrarDetallePiloto(nombre, records) {
                 <div style="color: #fff; font-weight: 500;">${rec.car}</div>
                 ${rec.carCategory ? `<div style="font-size: 12px; color: #ffe600; margin-top: 3px; font-weight: 600;">Clase: ${rec.carCategory}</div>` : ''}
             </td>
+            <td>${renderPlatformBadge(rec.platform)}</td>
             <td style="color: #ffe600; font-weight: bold; font-family: 'Orbitron', sans-serif;">${rec.time}</td>
             <td style="font-size: 12px; color: #9ca3af;">${fechaFormateada}</td>
             <td>${rec.videoUrl ? `<a href="${rec.videoUrl}" target="_blank" class="link-video">Ver Prueba</a>` : 'Sin video'}</td>

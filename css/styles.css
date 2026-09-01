@@ -1,7 +1,39 @@
 /* ==========================================
    ESTILOS GENERALES CLAN BSKR - MOTORFEST (Tono exacto optimizado)
    ========================================== */
-* {
+.navbar nav a.nav-highlight-prosetting {
+    color: #facc15;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(250, 204, 21, 0.3);
+    transition: all 0.3s ease;
+}
+.navbar nav a.nav-highlight-prosetting:hover {
+    color: #fde047;
+    text-shadow: 0 0 16px rgba(250, 204, 21, 0.6);
+}
+
+.navbar nav a.nav-highlight-metacars {
+    color: #10b981;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+    transition: all 0.3s ease;
+}
+.navbar nav a.nav-highlight-metacars:hover {
+    color: #34d399;
+    text-shadow: 0 0 16px rgba(16, 185, 129, 0.6);
+}
+
+.navbar nav a.nav-highlight-grandrace {
+    color: #3b82f6;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+    transition: all 0.3s ease;
+}
+.navbar nav a.nav-highlight-grandrace:hover {
+    color: #60a5fa;
+    text-shadow: 0 0 16px rgba(59, 130, 246, 0.6);
+}
+   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;

@@ -52,35 +52,32 @@
 </head>
 <body class="bg-motorfest text-white">
 
-    <!-- Navegación -->
     <header class="navbar">
-        <div class="logo">B<span>SKR</span></div>
-        <nav>
-            <a href="index.html">Inicio</a>
+    <div class="logo">B<span>SKR</span></div>
+    <nav>
+        <a href="index.html">Inicio</a>
             <a href="expediente.html">Récords</a>
+            <a href="tuneo.html" class="nav-highlight-prosetting">ProSetting</a>
+            <a href="metacars.html" class="nav-highlight-metacars">Meta Cars</a>
+            <a href="grand-race.html" class="nav-highlight-grandrace">Grand Race</a>
+            <a href="playlists.html" style="color: hsl(0, 2%, 90%); font-weight: 600; text-shadow: 0 0 10px rgba(236, 72, 153, 0.3);">Playlists</a>
             <a href="miembros.html">Miembros</a>
-            <a href="tuneo.html">ProSetting</a>
-            <a href="grand-race.html" class="active">Grand Race</a>
             <a href="ingreso.html" class="btn-login">Acceso/Perfil</a>
-        </nav>
-    </header>
+    </nav>
+</header>
 
-    <!-- Contenido Principal Grand Race -->
     <main class="main-container">
         <div class="grand-race-section">
             
-            <!-- Cabecera de Temporada -->
             <div class="season-header">
                 <h2>Season 10</h2>
                 <p>Rotación oficial sincronizada directamente desde los servidores de TunerFest.</p>
             </div>
 
-            <!-- EN VIVO / LIVE NOW -->
             <div class="live-badge">
                 <div class="live-dot"></div> Live Now (Oficial)
             </div>
 
-            <!-- Tarjeta principal de Estado con Reloj Global -->
             <div class="live-card">
                 <div class="live-info">
                     <div style="font-size: 12px; color: #9ca3af; margin-bottom: 5px;">Grand Race &bull; Sincronización Global</div>
@@ -88,13 +85,8 @@
                         <span>CONSULTAR HORARIO EXACTO ABAJO</span>
                     </div>
                     <div class="location-tag">📍 Vista en Directo de TunerFest App</div>
-                    
-                    <div class="timer-box" id="live-time">
-                        ⏱️ -- : -- <span>ACTUALIZANDO</span>
-                    </div>
                 </div>
                 
-                <!-- Logo Grand Race -->
                 <div class="live-logo-container">
                     <svg viewBox="0 0 320 100" style="width: 340px; height: auto;" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 35h35M-5 45h42M5 55h32M0 65h25M8 75h20" stroke="#facc15" stroke-width="4.5" stroke-linecap="round"/>
@@ -107,17 +99,6 @@
                 </div>
             </div>
 
-            <!-- Botones de Utilidades -->
-            <div class="btn-full" style="margin-bottom: 15px; cursor: pointer;">
-                🔔 Set Notifications
-            </div>
-            
-            <div class="action-buttons-grid">
-                <div class="btn-action-box">🎲 Custom Randomizer</div>
-                <div class="btn-action-box">🚗 Random Cars</div>
-            </div>
-
-            <!-- VISOR OFICIAL DE TUNERFEST (La única fuente real con la hora exacta de cada región) -->
             <div class="tunerfest-embed-box">
                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 5px 10px 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.1);">
                     <span style="font-family: 'Orbitron', sans-serif; font-size: 14px; color: #facc15; font-weight: bold;">CENTRAL DE ROTACIONES (TunerFest)</span>
@@ -134,26 +115,15 @@
     <footer>
         <p>&copy; 2026 Clan BSKR - The Crew Motorfest. Todos los derechos reservados.</p>
     </footer>
+    <div id="menu-container"></div>
 
-    <!-- Reloj de cuenta regresiva sincronizado al cambio de ciclo de 20 minutos de Motorfest -->
-    <script>
-        function actualizarRelojGlobal() {
-            const ahora = new Date();
-            const minutos = ahora.getMinutes();
-            const segundos = ahora.getSeconds();
-            
-            // Los eventos de Grand Race cambian exactos cada 20 minutos (00, 20, 40)
-            const minRestantesCiclo = 19 - (min % 20);
-            const segRestantesCiclo = 59 - segundos;
-            
-            const formatoSegs = segRestantesCiclo < 0 ? "00" : (segRestantesCiclo < 10 ? '0' + segRestantesCiclo : segRestantesCiclo);
-            const formatoMins = minRestantesCiclo < 0 ? "00" : minRestantesCiclo;
+<script>
+    fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('menu-container').innerHTML = data;
+        });
+</script>
 
-            document.getElementById('live-time').innerHTML = `⏱️ ${formatoMins}:${formatoSegs} <span>RESTANTES PARA SIGUIENTE CARRERA</span>`;
-        }
-
-        setInterval(actualizarRelojGlobal, 1000);
-        actualizarRelojGlobal();
-    </script>
 </body>
 </html>

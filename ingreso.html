@@ -12,16 +12,18 @@
 
     <!-- Navegación -->
     <header class="navbar">
-        <div class="logo">B<span>SKR</span></div>
-        <nav>
-            <a href="index.html">Inicio</a>
+    <div class="logo">B<span>SKR</span></div>
+    <nav>
+        <a href="index.html">Inicio</a>
             <a href="expediente.html">Récords</a>
+            <a href="tuneo.html" class="nav-highlight-prosetting">ProSetting</a>
+            <a href="metacars.html" class="nav-highlight-metacars">Meta Cars</a>
+            <a href="grand-race.html" class="nav-highlight-grandrace">Grand Race</a>
+            <a href="playlists.html" style="color: hsl(330, 1%, 66%); font-weight: 600; text-shadow: 0 0 10px rgba(236, 72, 153, 0.3);">Playlists</a>
             <a href="miembros.html">Miembros</a>
-            <a href="tuneo.html">ProSetting</a>
-            <a href="grand-race.html" class="active">Grand Race</a>
             <a href="ingreso.html" class="btn-login">Acceso/Perfil</a>
-        </nav>
-    </header>
+    </nav>
+</header>
 
     <!-- Contenedor Principal Centrado y Amplio -->
     <main style="display: flex; justify-content: center; align-items: flex-start; padding: 40px 20px; min-height: 85vh;">
@@ -70,6 +72,17 @@
                         <input type="text" id="record-track" required placeholder="Ej: Tour Oahu">
                     </div>
 
+                    <!-- NUEVO CAMPO: PLATAFORMA -->
+                    <div class="input-group">
+                        <label for="record-platform">Plataforma</label>
+                        <select id="record-platform" required class="form-control">
+                            <option value="" disabled selected>Selecciona la plataforma</option>
+                            <option value="PC">PC</option>
+                            <option value="PlayStation">PlayStation</option>
+                            <option value="Xbox">Xbox</option>
+                        </select>
+                    </div>
+
                     <div class="input-group">
                         <label>Categoría de Vehículo</label>
                         <select id="car-category-select" required>
@@ -99,6 +112,7 @@
                         <label>Tiempo / Puntuación</label>
                         <input type="text" id="record-time" required placeholder="Ej: 02:14.560">
                     </div>
+                    
 
                     <div class="input-group">
                         <label>URL del Video de Evidencia</label>
@@ -331,5 +345,14 @@
 
     <script type="module" src="js/auth.js"></script>
     <script type="module" src="js/records.js"></script>
+    <div id="menu-container"></div>
+
+<script>
+    fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('menu-container').innerHTML = data;
+        });
+</script>
 </body>
 </html>

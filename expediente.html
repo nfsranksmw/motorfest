@@ -12,16 +12,18 @@
 
     <!-- Navegación -->
     <header class="navbar">
-        <div class="logo">B<span>SKR</span></div>
-        <nav>
-            <a href="index.html">Inicio</a>
+    <div class="logo">B<span>SKR</span></div>
+    <nav>
+        <a href="index.html">Inicio</a>
             <a href="expediente.html">Récords</a>
+            <a href="tuneo.html" class="nav-highlight-prosetting">ProSetting</a>
+            <a href="metacars.html" class="nav-highlight-metacars">Meta Cars</a>
+            <a href="grand-race.html" class="nav-highlight-grandrace">Grand Race</a>
+            <a href="playlists.html" style="color: hsl(0, 0%, 83%); font-weight: 600; text-shadow: 0 0 10px rgba(236, 72, 153, 0.3);">Playlists</a>
             <a href="miembros.html">Miembros</a>
-            <a href="tuneo.html">ProSetting</a>
-            <a href="grand-race.html" class="active">Grand Race</a>
             <a href="ingreso.html" class="btn-login">Acceso/Perfil</a>
-        </nav>
-    </header>
+    </nav>
+</header>
 
     <!-- Contenido Principal -->
     <main class="main-container">
@@ -46,6 +48,7 @@
                         <tr>
                             <th>Evento / Pista</th>
                             <th>Vehículo Utilizado</th>
+                            <th>Plataforma</th>
                             <th>Tiempo / Puntuación</th>
                             <th>Fecha</th>
                             <th>Prueba en Video</th>
@@ -65,5 +68,14 @@
 
     <!-- Script de Expediente -->
     <script type="module" src="js/records.js"></script>
+    <div id="menu-container"></div>
+
+<script>
+    fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('menu-container').innerHTML = data;
+        });
+</script>
 </body>
 </html>
