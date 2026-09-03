@@ -12,18 +12,19 @@
 
     <!-- Navegación -->
     <header class="navbar">
-    <div class="logo">B<span>SKR</span></div>
-    <nav>
-        <a href="index.html">Inicio</a>
+        <div class="logo">B<span>SKR</span></div>
+        <nav>
+            <a href="index.html">Inicio</a>
             <a href="expediente.html">Récords</a>
+            <a href="ranked-playlists.html">Ranked</a>
             <a href="tuneo.html" class="nav-highlight-prosetting">ProSetting</a>
             <a href="metacars.html" class="nav-highlight-metacars">Meta Cars</a>
             <a href="grand-race.html" class="nav-highlight-grandrace">Grand Race</a>
-            <a href="playlists.html" style="color: hsl(330, 1%, 66%); font-weight: 600; text-shadow: 0 0 10px rgba(236, 72, 153, 0.3);">Playlists</a>
+            <a href="playlists.html" style="color: hsl(0, 0%, 77%); font-weight: 600; text-shadow: 0 0 10px rgba(236, 72, 153, 0.3);">Playlists</a>
             <a href="miembros.html">Miembros</a>
             <a href="ingreso.html" class="btn-login">Acceso/Perfil</a>
-    </nav>
-</header>
+        </nav>
+    </header>
 
     <!-- Contenedor Principal Centrado y Amplio -->
     <main style="display: flex; justify-content: center; align-items: flex-start; padding: 40px 20px; min-height: 85vh;">
@@ -47,9 +48,9 @@
         </section>
 
         <!-- SECCIÓN 2: PANEL DE USUARIO (DASHBOARD) -->
-        <section id="dashboard-section" class="hidden" style="width: 100%; max-width: 1200px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: start;">
+        <section id="dashboard-section" class="hidden" style="width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 40px; align-items: center;">
             
-            <!-- COLUMNA IZQUIERDA: GESTIÓN DE RÉCORDS -->
+            <!-- BLOQUE 1: GESTIÓN DE RÉCORDS -->
             <div class="form-box" style="width: 100%; max-width: none; margin: 0;">
                 <h2>Bienvenido, <span id="user-tag-display">Piloto</span></h2>
                 <p>Sube tu evidencia o gestiona tus récords publicados en el expediente oficial.</p>
@@ -113,7 +114,6 @@
                         <input type="text" id="record-time" required placeholder="Ej: 02:14.560">
                     </div>
                     
-
                     <div class="input-group">
                         <label>URL del Video de Evidencia</label>
                         <input type="url" id="record-video" required placeholder="https://youtube.com/watch?v=...">
@@ -147,7 +147,7 @@
                 <button id="btn-logout" class="btn-secondary full-width" style="margin-top: 25px;">Cerrar Sesión</button>
             </div>
 
-            <!-- COLUMNA DERECHA: PUBLICACIÓN Y GESTIÓN DE PRO SETTINGS -->
+            <!-- BLOQUE 2: PUBLICACIÓN Y GESTIÓN DE PRO SETTINGS -->
             <div class="form-box" style="width: 100%; max-width: none; margin: 0;">
                 <h3 style="font-family: 'Orbitron', sans-serif; color: #ffe600; font-size: 18px; margin-bottom: 20px; text-align: center;">Publicar Pro Setting Mecánico</h3>
                 
@@ -177,7 +177,6 @@
                         </select>
                     </div>
 
-                    <!-- NUEVO CAMPO: MARCA DE VEHÍCULO -->
                     <div class="input-group">
                         <label>Marca del Vehículo</label>
                         <input type="text" id="ps-brand" required placeholder="Ej: Chevrolet, Porsche, Nissan">
@@ -343,16 +342,16 @@
         <p>&copy; 2026 Clan BSKR - The Crew Motorfest. Todos los derechos reservados.</p>
     </footer>
 
+    <!-- Scripts -->
+    <script>
+        // Carga el menú navbar de forma asíncrona
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-container').innerHTML = data;
+            });
+    </script>
     <script type="module" src="js/auth.js"></script>
     <script type="module" src="js/records.js"></script>
-    <div id="menu-container"></div>
-
-<script>
-    fetch('navbar.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('menu-container').innerHTML = data;
-        });
-</script>
 </body>
 </html>
