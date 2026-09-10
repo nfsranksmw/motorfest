@@ -10,6 +10,71 @@
     <!-- Integración de Tesseract.js para OCR en el navegador -->
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <style>
+    /* Ajustes base de protección móvil */
+    * {
+        box-sizing: border-box;
+        max-width: 100%;
+    }
+
+    body {
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Navbar adaptable por defecto */
+    .navbar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background: rgba(18, 18, 18, 0.95);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        align-items: center;
+    }
+
+    @media(max-width: 768px) {
+        .navbar {
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+        .navbar nav {
+            justify-content: center;
+            gap: 10px;
+        }
+        .playlists-grid {
+            grid-template-columns: 1fr !important;
+        }
+        .motorfest-card {
+            flex-direction: column !important;
+            align-items: stretch !important;
+        }
+        .motorfest-thumb-container {
+            width: 100% !important;
+            min-width: 100% !important;
+            height: 180px !important;
+        }
+        .motorfest-rewards {
+            width: 100% !important;
+            min-width: 100% !important;
+            align-items: flex-start !important;
+            border-left: none !important;
+            border-top: 1px solid #27272a;
+        }
+        #upload-modal > div {
+            width: 95% !important;
+            padding: 20px !important;
+        }
+    }
+
     .playlists-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -195,21 +260,23 @@
     </style>
 </head>
 <body class="bg-motorfest text-white">
-    <!-- Navegación -->
-    <header class="navbar">
-        <div class="logo">B<span>SKR</span></div>
-        <nav>
-            <a href="index.html">Inicio</a>
-            <a href="expediente.html">Récords</a>
-            <a href="ranked-playlists.html">Ranked</a>
-            <a href="tuneo.html" class="nav-highlight-prosetting">ProSetting</a>
-            <a href="metacars.html" class="nav-highlight-metacars">Meta Cars</a>
-            <a href="grand-race.html" class="nav-highlight-grandrace">Grand Race</a>
-            <a href="playlists.html" style="color: hsl(0, 0%, 77%); font-weight: 600; text-shadow: 0 0 10px rgba(236, 72, 153, 0.3);">Playlists</a>
-            <a href="miembros.html">Miembros</a>
-            <a href="ingreso.html" class="btn-login">Acceso/Perfil</a>
-        </nav>
-    </header>
+    <!-- Navegación asíncrona / Contenedor principal -->
+    <div id="menu-container">
+        <header class="navbar">
+            <div class="logo">B<span>SKR</span></div>
+            <nav>
+                <a href="index.html">Inicio</a>
+                <a href="expediente.html">Récords</a>
+                <a href="ranked-playlists.html">Ranked</a>
+                <a href="tuneo.html" class="nav-highlight-prosetting">ProSetting</a>
+                <a href="metacars.html" class="nav-highlight-metacars">Meta Cars</a>
+                <a href="grand-race.html" class="nav-highlight-grandrace">Grand Race</a>
+                <a href="playlists.html" style="color: hsl(0, 0%, 77%); font-weight: 600; text-shadow: 0 0 10px rgba(236, 72, 153, 0.3);">Playlists</a>
+                <a href="miembros.html">Miembros</a>
+                <a href="ingreso.html" class="btn-login">Acceso/Perfil</a>
+            </nav>
+        </header>
+    </div>
 
     <main style="display: flex; justify-content: center; align-items: flex-start; padding: 40px 20px; min-height: 85vh;">
         
@@ -244,7 +311,7 @@
                 </div>
 
                 <div style="overflow-x: auto;">
-                    <table class="bskr-table" style="width: 100%; font-size: 13px; border-collapse: collapse; text-align: left;">
+                    <table class="bskr-table" style="width: 100%; font-size: 13px; border-collapse: collapse; text-align: left; min-width: 600px;">
                         <thead>
                             <tr style="border-bottom: 1px solid #374151;">
                                 <th style="padding: 12px; text-align: center; width: 60px;">Pos</th>
@@ -277,7 +344,7 @@
             <!-- Contenedor dinámico para la previsualización y edición de datos extraídos por OCR -->
             <div id="ocr-preview-container"></div>
 
-            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+            <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
                 <button id="btn-submit-upload" style="background: #ffe600; color: #000; border: none; padding: 8px 16px; font-weight: bold; border-radius: 4px; cursor: pointer; font-family: 'Orbitron';">Procesar Imagen</button>
                 <button id="btn-close-modal" style="background: #27272a; color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-family: 'Orbitron';">Cancelar</button>
             </div>
@@ -290,5 +357,12 @@
 
     <script type="module" src="js/auth.js"></script>
     <script type="module" src="js/ranked-playlists.js"></script>
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-container').innerHTML = data;
+            });
+    </script>
 </body>
 </html>
