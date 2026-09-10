@@ -4,7 +4,7 @@
 // ==========================================
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBPvGd0mCaql2yMeKK3UogRBDj3Ig9EYOI",
@@ -62,7 +62,9 @@ async function cargarExpedientes() {
     try {
         pilotsGrid.innerHTML = `<p style="color: #9ca3af; grid-column: 1 / -1;">Cargando registros de pilotos...</p>`;
         
-        const querySnapshot = await getDocs(collection(db, "records"));
+        // Se añade orderBy para ordenar los registros desde el más reciente al más antiguo
+        const q = query(collection(db, "records"), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
         
         pilotsGrid.innerHTML = "";
 
